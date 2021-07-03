@@ -1,0 +1,3237 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src='nexusUI.js'></script>
+	<script src='Tone.js'></script>
+	<script src='p5.min.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/webmidi"></script>
+	<link rel="stylesheet" href="style.css">
+ <meta charset="utf-8">
+ <title>Ocean Swift Aeolian Spider</title>
+</head>
+<body style="background-color:#3E6C8E">
+
+<!-- -----------------Device Name---------------------------- -->    	
+
+	<div class="deviceNameContainer">
+		Ocean Swift - Aeolian Spider Web v0.2
+	</div>
+
+<!-- -----------------Device Logo---------------------------- -->    	
+
+	<div class="deviceLogoContainer">
+		<img src="oslogo.png"> 
+	</div>	
+
+<!-- -----------------Manual---------------------------- -->    	
+
+	<div class="manualTextContainer">
+		Manual
+		<br>
+		<iframe src="https://faxinadu.net/jstest/tone/synth/manual.html" width="240" height="150"></iframe>
+	</div>	
+
+<!-- -----------------Preset List---------------------------- -->    	
+
+	<div class="presetListContainer">
+		Presets
+		<br>
+		<iframe src="https://faxinadu.net/jstest/tone/synth/presets.html" width="240" height="150"></iframe>
+	</div>		
+
+<!-- -----------------Info Text---------------------------- -->    
+
+    <div class="infoTextContainer">
+    	
+        ** Best viewed in Chrome **
+        <br>   
+        Report bugs and Source Code: 
+        <br>
+		<a href=" https://github.com/faxinadu/Aeolian-Spider-Web"> https://github.com/faxinadu/Aeolian-Spider-Web</a>
+       
+
+    </div>
+
+<!-- -----------------Presets---------------------------- -->    
+
+     <div class="presetSectionContainer">
+    
+        <div class="presetsLabelText">
+        Presets
+        </div>
+
+        <button type="button" class= "presetSaveButtonContainer" id="presetSaveButton" onclick="presetSave()">
+        Save
+        </button>
+
+        <div class="presetSaveNameContainer">
+        Save Name: <input type="text" name="sname" id="presetSaveName" value="ocean.txt"><br>
+        </div>
+
+        <button type="button" class= "presetLoadButtonContainer" id="presetLoadButton" onclick="loadFile()">
+        Load
+        </button>
+
+        <div class="presetLoadPathContainer">
+        Load Path: <input type="text" name="lname" id="presetLoadPath" value="presets/init.txt"><br>
+        </div>
+
+     </div>
+
+<!-- -----------------Main Controls---------------------------- -->
+    
+    <div class="mainSettingsContainer">
+
+		<div class="mainGainSliderContainer">
+		Main Gain
+		<br>
+	    <input type="range" min="0" max="1" value="0.1" step="0.01" class="slider" id="mainGainSlider" oninput="mainGainSet()">
+	    </div>
+
+		<div class="bpmSliderContainer">
+	    BPM
+		<br>
+	    <input type="range" min="60" max="160" value="120" step="1" class="slider" id="bpmSlider" oninput="bpmSet()">
+	    </div>
+
+	    <div class="bpmDisplayText" id="bpmDisplay">
+		    
+		</div>
+
+	    <div class="bendRangeSliderContainer" oninput="pitchBendRangeSet()" >
+	    Bend Range
+	    <br>
+	 		<input type="range" min="0" max="12" value="2" class="slider" id="bendRangeSlider">
+	    </div>
+
+	    <div class="bendRangeDisplayText" id="bendRangeDisplay">
+	    
+	    </div>
+
+	    <label class="droneContainer">
+	    Drone
+	    <br>
+        <input type="checkbox" id="droneOnCheckbox">
+        <span class="checkmarkDrone"></span>
+        </label>
+
+        <label class="aeolianModeContainer">
+        Aeolian
+        <br>
+        <input type="checkbox" id="aeolianOnCheckbox" onclick="aeolianSwitch()">
+        <span class="checkmarkAeolian"></span>
+        </label>
+
+    </div>
+
+
+
+<!-- -----------------Subtractive---------------------------- -->
+
+	<div class="subtractiveSectionContainer">	
+
+		Subtractive
+		<br>
+
+		<div class="oscAsectionContainer">	
+
+		    <div class="oscAtypeSliderContainer" >
+		   	Wave
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.75" step="0.01" class="slider" id="oscAtypeSlider" oninput="oscAtypeSet()">
+		    </div>
+
+		    <div class="oscAtypeDisplayContainer" id="oscAtypeDisplay">
+	    	
+	    	</div>   
+
+		    <div class="oscAoctaveSliderContainer" >
+		   	Octave
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="oscAoctaveSlider" oninput="oscAoctaveSet()">
+		    </div>
+
+		    <div class="oscAoctaveDisplayContainer" id="oscAoctaveDisplay">
+	    	
+	    	</div> 
+
+		    <div class="oscAsemiSliderContainer" >
+		   	Semi
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="oscAsemiSlider" oninput="oscAsemiSet()">
+		    </div>
+
+		    <div class="oscAsemiDisplayContainer" id="oscAsemiDisplay">
+	    	
+	    	</div> 
+
+		    <div class="oscAfineSliderContainer" >
+		   	Fine
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="oscAfineSlider" oninput="oscAfineSet()">
+		    </div>
+
+		    <div class="oscAfineDisplayContainer" id="oscAfineDisplay">
+	    	
+	    	</div> 
+
+		</div>
+
+		<div class="oscBsectionContainer">	
+
+		    <div class="oscBtypeSliderContainer" >
+		   	Wave
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.75" step="0.01" class="slider" id="oscBtypeSlider" oninput="oscBtypeSet()">
+		    </div>
+
+		    <div class="oscBtypeDisplayContainer" id="oscBtypeDisplay">
+	    	
+	    	</div>   
+
+		    <div class="oscBoctaveSliderContainer" >
+		   	Octave
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="oscBoctaveSlider" oninput="oscBoctaveSet()">
+		    </div>
+
+		    <div class="oscBoctaveDisplayContainer" id="oscBoctaveDisplay">
+	    	
+	    	</div> 
+
+		    <div class="oscBsemiSliderContainer" >
+		   	Semi
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="oscBsemiSlider" oninput="oscBsemiSet()">
+		    </div>
+
+		    <div class="oscBsemiDisplayContainer" id="oscBsemiDisplay">
+	    	
+	    	</div> 
+
+		    <div class="oscBfineSliderContainer">
+		   	Fine
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="oscBfineSlider" oninput="oscBfineSet()">
+		    </div>
+
+		    <div class="oscBfineDisplayContainer" id="oscBfineDisplay">
+	    	
+	    	</div> 
+
+		</div>
+
+		<div class="subtractiveMixLabelText">
+	    Mix
+	    </div>
+
+	 	<div class="subtractiveMixSliderContainer">
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="subtractiveMixSlider" oninput="subtractiveMixSet()">
+	    </div>
+
+	    <div class="subtractiveGainLabelText">
+	    Gain
+	    </div>
+
+	 	<div class="subtractiveGainSliderContainer">
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="subtractiveGainSlider" oninput="subtractiveGainSet()">
+	    </div>
+
+	</div>
+
+<!-- -----------------Additive---------------------------- -->
+
+	<div class="additiveTuneContainer">
+
+			<div class="additiveOctaveSliderContainer">
+		   	Octave
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="additiveOctaveSlider" oninput="addOctaveSet()">
+		    </div>
+
+		    <div class="additiveOctaveDisplayContainer" id="additiveOctaveDisplay">
+	    	
+	    	</div> 
+
+		    <div class="additiveSemiSliderContainer">
+		   	Semi
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="additiveSemiSlider" oninput="addSemiSet()">
+		    </div>
+
+		    <div class="additiveSemiDisplayContainer" id="additiveSemiDisplay">
+	    	
+	    	</div> 
+
+		    <div class="additiveFineSliderContainer">
+		   	Fine
+		   	<br>
+		    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="additiveFineSlider" oninput="addFineSet()">
+		    </div>
+
+		     <div class="additiveFineDisplayContainer" id="additiveFineDisplay">
+	    	
+	    	</div> 
+
+	</div>
+
+	<div class="additiveSectionContainer">	
+
+	    <!-- Volumes ---------------------------- -->
+
+	    <div class="harmonicVolSliderContainer1">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider1" oninput="addGainSet(1)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer2">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider2" oninput="addGainSet(2)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer3">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider3" oninput="addGainSet(3)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer4">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider4" oninput="addGainSet(4)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer5">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider5" oninput="addGainSet(5)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer6">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider6" oninput="addGainSet(6)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer7">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider7" oninput="addGainSet(7)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer8">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider8" oninput="addGainSet(8)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer9">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider9" oninput="addGainSet(9)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer10">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider10" oninput="addGainSet(10)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer11">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider11" oninput="addGainSet(11)">
+	    </div>
+
+	    <div class="harmonicVolSliderContainer12">
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="harmonicVolSlider12" oninput="addGainSet(12)">
+	    </div>
+
+	     <div class="harmonicMixSliderContainer">
+	    <input type="range" min="0" max="1" value="1" step="0.01" class="slider" id="harmonicMixSlider" oninput="addMixSet()">
+	    </div>
+
+	    <button type="button" class= "harmonicRandomButtonContainer" id="harmonicRandom" onclick="additiveRandom()">
+	    Random
+	    </button>
+
+	    <label class="harmonicRandomMultContainer">
+	    <input type="checkbox" id="randomMultOnChecbox" >
+	    <span class="checkmarkHarmonicRandomMult"></span>
+	    </label>
+
+	    <div class="harmonicRandomMultText">
+	    Mult
+	    </div>
+
+	    <button type="button" class= "harmonicResetButtonContainer" id="harmonicReset" onclick="additiveReset()">
+	    Reset
+	    </button>
+
+	    <div class="harmonicsLabelText">
+	    Additive
+	    </div>
+
+	    <div class="harmonicsMixLabelText">
+	    Mix
+	    </div>
+
+	    <!-- Pan ---------------------------- -->
+
+	    <div class="harmonicPanSliderContainer1" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider1" oninput="addPanSet(1)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer2" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider2" oninput="addPanSet(2)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer3" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider3" oninput="addPanSet(3)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer4" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider4" oninput="addPanSet(4)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer5" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider5" oninput="addPanSet(5)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer6" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider6" oninput="addPanSet(6)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer7" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider7" oninput="addPanSet(7)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer8" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider8" oninput="addPanSet(8)">
+	    </div>
+
+	     <div class="harmonicPanSliderContainer9" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider9" oninput="addPanSet(9)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer10" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider10" oninput="addPanSet(10)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer11" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider11" oninput="addPanSet(11)">
+	    </div>
+
+	    <div class="harmonicPanSliderContainer12" >
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="harmonicPanSlider12" oninput="addPanSet(12)">
+	    </div>
+
+
+	    <!-- Freq Multiplier ---------------------------- -->
+
+	    <form action="" class="freqMultiplier1">
+	    <input type="number" id="freqMult1" min="0" max="16" value="1" step="0.01" oninput="freqMultSet(1)">
+	    </form>
+
+	    <form action="" class="freqMultiplier2">
+	    <input type="number" id="freqMult2" min="0" max="16" value="2" step="0.01" oninput="freqMultSet(2)">
+	    </form>
+
+	    <form action="" class="freqMultiplier3">
+	    <input type="number" id="freqMult3" min="0" max="16" value="3" step="0.01" oninput="freqMultSet(3)">
+	    </form>
+
+	    <form action="" class="freqMultiplier4">
+	    <input type="number" id="freqMult4" min="0" max="16" value="4" step="0.01" oninput="freqMultSet(4)">
+	    </form>
+
+	    <form action="" class="freqMultiplier5">
+	    <input type="number" id="freqMult5" min="0" max="16" value="5" step="0.01" oninput="freqMultSet(5)">
+	    </form>
+
+	    <form action="" class="freqMultiplier6">
+	    <input type="number" id="freqMult6" min="0" max="16" value="6" step="0.01" oninput="freqMultSet(6)">
+	    </form>
+
+	    <form action="" class="freqMultiplier7">
+	    <input type="number" id="freqMult7" min="0" max="16" value="7" step="0.01" oninput="freqMultSet(7)">
+	    </form>
+
+	    <form action="" class="freqMultiplier8">
+	    <input type="number" id="freqMult8" min="0" max="16" value="8" step="0.01" oninput="freqMultSet(8)">
+	    </form>
+
+	     <form action="" class="freqMultiplier9">
+	    <input type="number" id="freqMult9" min="0" max="16" value="9" step="0.01" oninput="freqMultSet(9)">
+	    </form>
+
+	     <form action="" class="freqMultiplier10">
+	    <input type="number" id="freqMult10" min="0" max="16" value="10" step="0.01" oninput="freqMultSet(10)">
+	    </form>
+
+	     <form action="" class="freqMultiplier11">
+	    <input type="number" id="freqMult11" min="0" max="16" value="11" step="0.01" oninput="freqMultSet(11)">
+	    </form>
+
+	     <form action="" class="freqMultiplier12">
+	    <input type="number" id="freqMult12" min="0" max="16" value="12" step="0.01" oninput="freqMultSet(12)">
+	    </form>
+
+	    <div class="fmContainer">
+
+	        <div class="fmDepthSliderContainer" >
+	        <input type="range" min="0" max="1" value="0" step="0.01" class="slider" id="fmDepthSlider" oninput="addFmModSet()">
+	        </div>
+
+	        <div class="fmFreqSliderContainer" >
+	        <input type="range" min="0" max="1" value="0.4" step="0.01" class="slider" id="fmFreqSlider" oninput="addFmFreqSet()">
+	        </div>
+
+	        <div class="fmLabelText">
+	        FM
+	        </div>
+
+	        <div class="fmDepthText">
+	        Mod
+	        </div>
+
+	        <div class="fmFreqText">
+	        Freq
+	        </div>
+
+   		 </div>
+
+	</div>
+
+<!-- -----------------Pitch Modulations ---------------------------- -->
+				
+		<div class="pitchModulationContainer">			
+
+		<!-- -----------------Pitch Envelope---------------------------- -->
+
+				<div class="pitchEnvelopeContainer">	
+
+				Pitch Envelope
+			   	<br>
+
+			    <div class="pitchAttackSliderContainer" >
+			    <input type="range" min="0" max="1" value="0.01" step="0.01" class="slider" id="pitchAttackSlider" oninput="pitchAttackSet()">
+			    </div>
+			    
+			    <div class="pitchDecaySliderContainer" >
+			    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="pitchDecaySlider" oninput="pitchDecaySet()">
+			    </div>
+
+			    <div class="pitchSustainSliderContainer" >
+			    <input type="range" min="0" max="1" value="1" step="0.01" class="slider" id="pitchSustainSlider" oninput="pitchSustainSet()">
+			    </div>
+
+			    <div class="pitchReleaseSliderContainer" >
+			    <input type="range" min="0" max="1" value="0.25" step="0.01" class="slider" id="pitchReleaseSlider" oninput="pitchReleaseSet()">
+			    </div>
+
+			    <div class="pitchEnvModSliderContainer" >
+			    <input type="range" min="0" max="1" value="0" step="0.01" class="slider" id="pitchEnvModSlider" oninput="pitchEnvModSet()">
+			    </div>
+
+			    <div class="pitchAttackText">
+			    A
+			    </div>
+
+			    <div class="pitchDecayText">
+			    D
+			    </div>
+
+			    <div class="pitchSustainText">
+			    S
+			    </div>
+
+			    <div class="pitchReleaseText">
+			    R
+			    </div>
+
+			    <div class="pitchEnvModText">
+			    Mod
+			    </div>
+
+    			</div>
+
+		<!-- -----------------Pitch LFO---------------------------- -->
+
+ 			<div class="pitchLfoContainer">	
+
+		    	Pitch LFO
+			   	<br>
+
+			   	<div class="pitchLfoWaveSliderContainer">
+			    Wave
+			    <br>
+			    <input type="range" min="0" max="1" value="0.25" step="0.01" class="slider" id="pitchLfoWaveSlider" oninput="pitchLfoWaveSet()">
+			    </div>
+
+			    <div class="pitchLfoWaveDisplayContainer" id="pitchLfoWaveDisplay">
+		    
+		    	</div>
+
+			    <div class="pitchLfoModSliderContainer">
+			    Mod
+			    <br>
+			    <input type="range" min="0" max="1" value="0" step="0.01" class="slider" id="pitchLfoModSlider" oninput="pitchLfoModSet()">
+			    </div> 
+
+			    <div class="pitchLfoRateSliderContainer">
+			    Rate
+			    <br>
+			    <input type="range" min="0" max="1" value="0.25" step="0.01" class="slider" id="pitchLfoRateSlider" oninput="pitchLfoRateSet()">
+			    </div> 
+
+			    <div class="pitchLfoRateDisplayContainer" id="pitchLfoRateDisplay">
+		    
+		    	</div>
+
+			    <div class="pitchLfoRateDisplayText" id="pitchLfoRateDisplay">
+		    
+		    	</div>
+
+		    	<label class="pitchLfoSyncCheboxContainer">
+			    Sync
+			    <br>
+			    <input type="checkbox" id="pitchLfoSyncCheckbox" onclick="pitchLfoRateSet()">
+			    <span class="checkmarkPitchLfoSync"></span>
+			    </label>
+
+			    <br>
+			    <label class="pitchLfoRetrigCheboxContainer">
+		   		Retrig
+		    	<br>
+		    	<input type="checkbox" id="pitchLfoRetrigCheckbox">
+		  		<span class="checkmarkPitchLfoRetrig"></span>
+	    		</label>
+
+	    	</div>
+
+	    </div>
+
+<!-- -----------------Amp Envelope---------------------------- -->
+	
+	<div class="ampEnvelopeContainer">	
+
+		Amp Envelope
+	   	<br>
+
+	    <div class="attackSliderContainer" >
+	    <input type="range" min="0" max="1" value="0.01" step="0.01" class="slider" id="attackSlider" oninput="ampAttackSet()">
+	    </div>
+	    
+	    <div class="decaySliderContainer" >
+	    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="decaySlider" oninput="ampDecaySet()">
+	    </div>
+
+	    <div class="sustainSliderContainer" >
+	    <input type="range" min="0" max="1" value="1" step="0.01" class="slider" id="sustainSlider" oninput="ampSustainSet()">
+	    </div>
+
+	    <div class="releaseSliderContainer" >
+	    <input type="range" min="0" max="1" value="0.25" step="0.01" class="slider" id="releaseSlider" oninput="ampReleaseSet()">
+	    </div>
+
+	    <div class="ampAttackText">
+	    A
+	    </div>
+
+	    <div class="ampDecayText">
+	    D
+	    </div>
+
+	    <div class="ampSustainText">
+	    S
+	    </div>
+
+	    <div class="ampReleaseText">
+	    R
+	    </div>
+
+    </div>
+
+<!-- -----------------Filter---------------------------- -->   
+		
+		<div class="filterSettingsContainer">	
+
+			<div class="filterMainControlsContainer">	
+
+				Filter
+		   		<br>
+
+		   		<div class="mainFilterTypeSliderContainer">
+			    Type
+			    <br>
+			    <input type="range" min="0" max="1" value="0" step="0.01" class="slider" id="mainFilterTypeSlider" oninput="mainFilterTypeSet()">
+			    </div>
+
+			    <div class="mainFilterTypeDisplayTextContainer" id="mainFilterTypeDisplay">
+    
+    			</div>
+
+				<div class="mainFilterCutSliderContainer">
+			    Cut
+			    <br>
+			    <input type="range" min="0" max="1" value="0.75" step="0.01" class="slider" id="filterCutSlider" oninput="mainFilterCutSet()">
+			    </div>
+
+			    <div class="mainFilterResSliderContainer">
+			    Res
+			    <br>
+			    <input type="range" min="0" max="1" value="0.25" step="0.01" class="slider" id="filterResSlider" oninput="mainFilterResSet()">
+			    </div> 
+
+		    </div>
+
+		    <div class="filterLfoContainer">	
+
+		    	Filter LFO
+			   	<br>
+
+			   	<div class="mainFilterLfoWaveSliderContainer">
+			    Wave
+			    <br>
+			    <input type="range" min="0" max="1" value="0.25" step="0.01" class="slider" id="mainFilterLfoWaveSlider" oninput="mainFilterLfoWaveSet()">
+			    </div>
+
+			    <div class="mainFilterLfoWaveDisplayContainer" id="mainFilterLfoWaveDisplay">
+		    
+		    	</div>
+
+			    <div class="mainFilterLfoModSliderContainer">
+			    Mod
+			    <br>
+			    <input type="range" min="0" max="1" value="0" step="0.01" class="slider" id="mainFilterLfoModSlider" oninput="mainFilterLfoModSet()">
+			    </div> 
+
+			    <div class="mainFilterLfoRateSliderContainer">
+			    Rate
+			    <br>
+			    <input type="range" min="0" max="1" value="0.25" step="0.01" class="slider" id="mainFilterLfoRateSlider" oninput="mainFilterLfoRateSet()">
+			    </div> 
+
+			    <div class="mainFilterLfoRateDisplayText" id="mainFilterLfoRateDisplay">
+		    
+		    	</div>
+
+		    	<label class="mainFilterSyncCheboxContainer">
+			    Sync
+			    <br>
+			    <input type="checkbox" id="mainFilterSyncCheckbox" onclick="mainFilterLfoRateSet()">
+			    <span class="checkmarkMainFilterSync"></span>
+			    </label>
+
+			    <br>
+			    <label class="mainFilterRetrigCheboxContainer">
+		   		Retrig
+		    	<br>
+		    	<input type="checkbox" id="mainFilterRetrigCheckbox">
+		  		<span class="checkmarkMainFilterRetrig"></span>
+	    		</label>
+
+	    	</div>
+
+	    	<div class="filterEnvelopeContainer">	
+
+				Filter Envelope
+			   	<br>
+
+			    <div class="filterAttackSliderContainer" >
+			    <input type="range" min="0" max="1" value="0.01" step="0.01" class="slider" id="mainFilterAttackSlider" oninput="mainFilterAttackSet()">
+			    </div>
+			    
+			    <div class="filterDecaySliderContainer" >
+			    <input type="range" min="0" max="1" value="0.3" step="0.01" class="slider" id="mainFilterDecaySlider" oninput="mainFilterDecaySet()">
+			    </div>
+
+			    <div class="filterSustainSliderContainer" >
+			    <input type="range" min="0" max="1" value="1" step="0.01" class="slider" id="mainFilterSustainSlider" oninput="mainFilterSustainSet()">
+			    </div>
+
+			    <div class="filterReleaseSliderContainer" >
+			    <input type="range" min="0" max="1" value="0.25" step="0.01" class="slider" id="mainFilterReleaseSlider" oninput="mainFilterReleaseSet()">
+			    </div>
+
+			    <div class="mainFilterEnvModSliderContainer">
+			    <input type="range" min="0" max="1" value="0" step="0.01" class="slider" id="mainFilterEnvModSlider" oninput="mainFilterEnvModSet()">
+			    </div> 
+
+			    <div class="filterAttackText">
+			    A
+			    </div>
+
+			    <div class="filterDecayText">
+			    D
+			    </div>
+
+			    <div class="filterSustainText">
+			    S
+			    </div>
+
+			    <div class="filterReleaseText">
+			    R
+			    </div>
+
+			    <div class="filterEnvModText">
+			    Mod
+			    </div>
+
+    		</div>
+
+	    </div> 
+
+<!-- -----------------Chorus---------------------------- -->
+	
+	<div class="chorusSettingsContainer">	
+		
+		Chorus
+   		<br>
+
+		<div class="chorusDelaySliderContainer">
+	    Delay
+	    <br>
+	    <input type="range" min="0" max="18" value="5" step="1" class="slider" id="chorusDelaySlider" oninput="chorusDelaySet()">
+	    </div>
+
+	    <div class="chorusRateSliderContainer">
+	    Rate
+	    <br>
+	    <input type="range" min="0" max="1" value="0.75" step="0.01" class="slider" id="chorusRateSlider" oninput="chorusRateSet()">
+	    </div>
+
+	    <div class="chorusDepthSliderContainer">
+	    Depth
+	    <br>
+	    <input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="chorusDepthSlider" oninput="chorusDepthSet()">
+	    </div>
+
+	    <div class="chorusWetSliderContainer">
+	    Wet
+	    <br>
+	    <input type="range" min="0" max="1" value="0" step="0.01" class="slider" id="chorusWetSlider" oninput="chorusWetSet()">
+	    </div>
+
+    </div>     
+
+<!-- -----------------Delay---------------------------- -->   
+		
+	<div class="delaySettingsContainer">	
+
+		Delay
+   		<br>
+
+		<div class="delayTimeSliderContainer">
+	    Time
+	    <br>
+	    <input type="range" min="0" max="18" value="5" step="1" class="slider" id="delayTimeSlider" oninput="delayTimeSet()">
+	    </div>
+
+	    <div class="delayTimeDisplayText" id="delayTimeDisplay">
+    
+    	</div>
+
+	    <div class="delayFbSliderContainer">
+	    FB
+	    <br>
+	    <input type="range" min="0" max="1" value="0.75" step="0.01" class="slider" id="delayFbSlider" oninput="delayFbSet()">
+	    </div>
+
+	    <div class="delayWetSliderContainer">
+	    Wet
+	    <br>
+	    <input type="range" min="0" max="1" value="0" step="0.01" class="slider" id="delayWetSlider" oninput="delayWetSet()">
+	    </div>
+
+    </div> 
+    
+<!-- -----------------Virtual Keys---------------------------- -->
+
+	<div class="oscilloscopeContainer" id="oscilloscopeDiv"></div>
+
+    <div class="keyboardContainer" id="keyboardDiv"></div>
+
+<!-- -----------------MIDI Settings---------------------------- -->
+
+	<div class="midiSettingsContainer">
+
+	    <div class="midiSelect" style="width:75px;">
+	            <select id="midiDevicesSelector">
+	                <option value="0">1</option>
+	                <option value="1">2</option>
+	                <option value="2">3</option>
+	                <option value="3">4</option>
+	                <option value="4" selected="selected" >5</option>
+	            </select>
+	    </div>
+
+	    <div class="midiMonitorDisplayContainer" id="midiMonitorDisplay">
+	    Midi Monitor
+	    </div>   
+		
+	    <div class="midiLearnTextContainer">
+	    Learn
+	    </div>  
+
+		<label class="midiLearnCheckboxContainer">
+	   		<input type="checkbox" id="midiLearnCheckbox" >
+	        <span class="checkmarkMidiLearn"></span>
+	    </label>
+
+	    <div class="midiVelocityTextContainer">
+	    Velocity
+	    </div>  
+
+		<label class="velocityCheboxContainer">
+		    <input type="checkbox" id="velocityOnCheckbox">
+		    <span class="checkmarkVelocity"></span>
+	    </label>
+
+	    <button type="button" class= "toneStartContainer" id="toneStart" onclick="startAudioClick()">
+	    Start Audio
+	    </button>
+
+    </div>
+
+<!-- -----------------Pitch Bend---------------------------- -->
+
+	<div class="pitchBendSettingsContainer">	
+
+	    <div class="pitchBendSliderContainer" onchange="pitchBendAction()" >
+	  	<input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="pitchBendSlider">
+	    </div>
+
+    </div>
+
+
+<script>
+
+////////////////////////
+// Tone/p5/Nexus Template
+// 2019 Ocean Swift Synthesis
+///////////////////////
+
+/////////////////////////////////////////// DOM Elements to variables
+// DOM Elements to variables
+
+// MIDI
+var midiDevices = document.getElementById('midiDevicesSelector');
+var myMidiMonitor = document.getElementById('midiMonitorDisplay');
+var velocityOn = document.getElementById('velocityOnCheckbox');
+
+// MIDI learn
+var midiLearn = document.getElementById('midiLearnCheckbox');
+var control = [];
+var controlId = [];
+var lastChanged;
+ 
+ // BPM
+var tempoBpm = document.getElementById('bpmSlider');
+bpmDisplay.innerHTML = tempoBpm.value;
+
+// pitch bend vars
+var pitchBender = document.getElementById("pitchBendSlider");
+var bendRange = document.getElementById("bendRangeSlider");
+var bendDisplay = document.getElementById("bendRangeDisplay");  
+var bendAction = false;
+bendDisplay.innerHTML = bendRange.value;
+
+// gain
+var mainGain = document.getElementById('mainGainSlider');
+control[0] = document.getElementById("mainGainSlider");
+
+// drone
+var droneOn = document.getElementById("droneOnCheckbox");
+
+// aeolian  
+var aeolianMode = document.getElementById('aeolianOnCheckbox');
+
+//amp envelope
+var ampA = document.getElementById("attackSlider");
+control[1] = document.getElementById("attackSlider");
+
+var ampD = document.getElementById("decaySlider");
+control[2] = document.getElementById("decaySlider");
+
+var ampS = document.getElementById("sustainSlider");
+control[3] = document.getElementById("sustainSlider");
+
+var ampR = document.getElementById("releaseSlider");
+control[4] = document.getElementById("releaseSlider");
+
+// fm
+var fmMod = document.getElementById("fmDepthSlider");
+control[5] = document.getElementById("fmDepthSlider");
+
+var fmFreq = document.getElementById("fmFreqSlider");
+control[6] = document.getElementById("fmFreqSlider");
+
+//pitch lfo
+var pitchLfoWave = document.getElementById("pitchLfoWaveSlider"); 
+control[7] = document.getElementById("pitchLfoWaveSlider");
+var pitchLfoWaveDisplay = document.getElementById("pitchLfoWaveDisplay"); 
+
+var pitchLfoMod = document.getElementById("pitchLfoModSlider");
+control[8] = document.getElementById("pitchLfoModSlider");
+
+var pitchLfoRate = document.getElementById("pitchLfoRateSlider");
+control[9] = document.getElementById("pitchLfoRateSlider");
+var pitchLfoRateDisplay = document.getElementById("pitchLfoRateDisplay"); 
+
+var pitchLfoRetrig = document.getElementById("pitchLfoRetrigCheckbox");
+control[10] = document.getElementById("pitchLfoRetrigCheckbox");
+
+var pitchLfoSync = document.getElementById("pitchLfoSyncCheckbox");
+control[11] = document.getElementById("pitchLfoSyncCheckbox");
+
+// pitch
+var pitchAttack = document.getElementById("pitchAttackSlider");
+control[12] = document.getElementById("pitchAttackSlider");
+
+var pitchDecay = document.getElementById("pitchDecaySlider");
+control[13] = document.getElementById("pitchDecaySlider");
+
+var pitchSustain = document.getElementById("pitchSustainSlider");
+control[14] = document.getElementById("pitchSustainSlider");
+
+var pitchRelease = document.getElementById("pitchReleaseSlider");
+control[15] = document.getElementById("pitchReleaseSlider");
+
+var pitchEnvMod = document.getElementById("pitchEnvModSlider");
+control[16] = document.getElementById("pitchEnvModSlider");
+
+// additive
+
+var addOctRaw = document.getElementById("additiveOctaveSlider");
+control[17] = document.getElementById("additiveOctaveSlider");
+
+var addOct = 0;
+var addOctaveDetuneValue = 1;
+var addOctaveDisplay = document.getElementById("additiveOctaveDisplay");
+
+var addSemiRaw = document.getElementById("additiveSemiSlider");
+control[18] = document.getElementById("additiveSemiSlider");
+
+var addSemi = 0;
+var addSemiDisplay = document.getElementById("additiveSemiDisplay");
+
+var addFineRaw = document.getElementById("additiveFineSlider");
+control[19] = document.getElementById("additiveFineSlider");
+
+var addFine = 0;
+var addFineDisplay = document.getElementById("additiveFineDisplay");
+
+// additive harmonics volumes
+var harmVol1 = document.getElementById("harmonicVolSlider1");
+control[20] = document.getElementById("harmonicVolSlider1");
+var harmVol2 = document.getElementById("harmonicVolSlider2");
+control[21] = document.getElementById("harmonicVolSlider2");
+var harmVol3 = document.getElementById("harmonicVolSlider3");
+control[22] = document.getElementById("harmonicVolSlider3");
+var harmVol4 = document.getElementById("harmonicVolSlider4");
+control[23] = document.getElementById("harmonicVolSlider4");
+var harmVol5 = document.getElementById("harmonicVolSlider5");
+control[24] = document.getElementById("harmonicVolSlider5");
+var harmVol6 = document.getElementById("harmonicVolSlider6");
+control[25] = document.getElementById("harmonicVolSlider6");
+var harmVol7 = document.getElementById("harmonicVolSlider7");
+control[26] = document.getElementById("harmonicVolSlider7");
+var harmVol8 = document.getElementById("harmonicVolSlider8");
+control[27] = document.getElementById("harmonicVolSlider8");
+var harmVol9 = document.getElementById("harmonicVolSlider9");
+control[28] = document.getElementById("harmonicVolSlider9");
+var harmVol10 = document.getElementById("harmonicVolSlider10");
+control[29] = document.getElementById("harmonicVolSlider10");
+var harmVol11 = document.getElementById("harmonicVolSlider11");
+control[30] = document.getElementById("harmonicVolSlider11");
+var harmVol12 = document.getElementById("harmonicVolSlider12");
+control[31] = document.getElementById("harmonicVolSlider12");
+
+var harmMixVol = document.getElementById("harmonicMixSlider");
+control[32] = document.getElementById("harmonicMixSlider");
+
+var randomMult = document.getElementById("randomMultOnChecbox");
+control[33] = document.getElementById("randomMultOnChecbox");
+
+// additive harmonics multipliers
+var harmFreqMult1 = document.getElementById("freqMult1");
+var harmFreqMult2 = document.getElementById("freqMult2");
+var harmFreqMult3 = document.getElementById("freqMult3");
+var harmFreqMult4 = document.getElementById("freqMult4");
+var harmFreqMult5 = document.getElementById("freqMult5");
+var harmFreqMult6 = document.getElementById("freqMult6");
+var harmFreqMult7 = document.getElementById("freqMult7");
+var harmFreqMult8 = document.getElementById("freqMult8");
+var harmFreqMult9 = document.getElementById("freqMult9");
+var harmFreqMult10 = document.getElementById("freqMult10");
+var harmFreqMult11 = document.getElementById("freqMult11");
+var harmFreqMult12 = document.getElementById("freqMult12");
+
+// additive harmonics pan
+var pan1 = document.getElementById("harmonicPanSlider1");
+control[34] = document.getElementById("harmonicPanSlider1");
+
+var pan2 = document.getElementById("harmonicPanSlider2");
+control[35] = document.getElementById("harmonicPanSlider2");
+
+var pan3 = document.getElementById("harmonicPanSlider3");
+control[36] = document.getElementById("harmonicPanSlider3");
+
+var pan4 = document.getElementById("harmonicPanSlider4");
+control[37] = document.getElementById("harmonicPanSlider4");
+
+var pan5 = document.getElementById("harmonicPanSlider5");
+control[38] = document.getElementById("harmonicPanSlider5");
+
+var pan6 = document.getElementById("harmonicPanSlider6");
+control[39] = document.getElementById("harmonicPanSlider6");
+
+var pan7 = document.getElementById("harmonicPanSlider7");
+control[40] = document.getElementById("harmonicPanSlider7");
+
+var pan8 = document.getElementById("harmonicPanSlider8");
+control[41] = document.getElementById("harmonicPanSlider8");
+
+var pan9 = document.getElementById("harmonicPanSlider9");
+control[42] = document.getElementById("harmonicPanSlider9");
+
+var pan10 = document.getElementById("harmonicPanSlider10");
+control[43] = document.getElementById("harmonicPanSlider10");
+
+var pan11 = document.getElementById("harmonicPanSlider11");
+control[44] = document.getElementById("harmonicPanSlider11");
+
+var pan12 = document.getElementById("harmonicPanSlider12");
+control[45] = document.getElementById("harmonicPanSlider12");
+
+// subtractive
+var subOscAwave = document.getElementById("oscAtypeSlider");
+control[46] = document.getElementById("oscAtypeSlider");
+
+var subOscAtypeDisplay = document.getElementById("oscAtypeDisplay");
+
+var subOscAoctRaw = document.getElementById("oscAoctaveSlider");
+control[47] = document.getElementById("oscAoctaveSlider");
+
+var subOscAoct = 0;
+var subAoctaveDetuneValue = 1
+var subOscAoctaveDisplay = document.getElementById("oscAoctaveDisplay");
+
+var subOscAsemiRaw = document.getElementById("oscAsemiSlider");
+control[48] = document.getElementById("oscAsemiSlider");
+
+var subOscAsemi = 0;
+var subOscAsemiDisplay = document.getElementById("oscAsemiDisplay");
+
+var subOscAfineRaw = document.getElementById("oscAfineSlider");
+control[49] = document.getElementById("oscAfineSlider");
+
+var subOscAfine = 0;
+var subOscAfineDisplay = document.getElementById("oscAfineDisplay");
+
+var subOscBwave = document.getElementById("oscBtypeSlider");
+control[50] = document.getElementById("oscBtypeSlider");
+
+var subOscBtypeDisplay = document.getElementById("oscBtypeDisplay");
+
+var subOscBoctRaw = document.getElementById("oscBoctaveSlider");
+control[51] = document.getElementById("oscBoctaveSlider");
+
+var subOscBoct = 0;
+var subBoctaveDetuneValue = 1;
+var subOscBoctaveDisplay = document.getElementById("oscBoctaveDisplay");
+
+var subOscBsemiRaw = document.getElementById("oscBsemiSlider");
+control[52] = document.getElementById("oscBsemiSlider");
+
+var subOscBsemi = 0;
+var subOscBsemiDisplay = document.getElementById("oscBsemiDisplay");
+
+var subOscBfineRaw = document.getElementById("oscBfineSlider");
+control[53] = document.getElementById("oscBfineSlider");
+
+var subOscBfine = 0;
+var subOscBfineDisplay = document.getElementById("oscBfineDisplay");
+
+var subtractiveMix = document.getElementById("subtractiveMixSlider");
+control[54] = document.getElementById("subtractiveMixSlider");
+
+var subtractiveVol = document.getElementById("subtractiveGainSlider");
+control[55] = document.getElementById("subtractiveGainSlider");
+
+//filter
+var mainFilterType = document.getElementById("mainFilterTypeSlider");
+control[56] = document.getElementById("mainFilterTypeSlider");
+
+var mainFilterTypeDisplay = document.getElementById("mainFilterTypeDisplay");
+
+var filterCut = document.getElementById("filterCutSlider");
+control[57] = document.getElementById("filterCutSlider");
+
+var filterRes = document.getElementById("filterResSlider");
+control[58] = document.getElementById("filterResSlider");
+
+//filter lfo
+var mainFilterLfoWave = document.getElementById("mainFilterLfoWaveSlider"); 
+control[59] = document.getElementById("mainFilterLfoWaveSlider");
+
+var mainFilterLfoWaveDisplay = document.getElementById("mainFilterLfoWaveDisplay"); 
+
+var mainFilterLfoMod = document.getElementById("mainFilterLfoModSlider");
+control[60] = document.getElementById("mainFilterLfoModSlider");
+
+var mainFilterLfoRate = document.getElementById("mainFilterLfoRateSlider");
+control[61] = document.getElementById("mainFilterLfoRateSlider");
+
+var mainFilterLfoRateDisplay = document.getElementById("mainFilterLfoRateDisplay"); 
+
+var mainFilterLfoRetrig = document.getElementById("mainFilterRetrigCheckbox");
+control[62] = document.getElementById("mainFilterRetrigCheckbox");
+
+var mainFilterLfoSync = document.getElementById("mainFilterSyncCheckbox");
+control[63] = document.getElementById("mainFilterSyncCheckbox");
+
+// filter envelope
+var mainFilterAttack = document.getElementById("mainFilterAttackSlider");
+control[64] = document.getElementById("mainFilterAttackSlider");
+
+var mainFilterDecay = document.getElementById("mainFilterDecaySlider");
+control[65] = document.getElementById("mainFilterDecaySlider");
+
+var mainFilterSustain = document.getElementById("mainFilterSustainSlider");
+control[66] = document.getElementById("mainFilterSustainSlider");
+
+var mainFilterRelease = document.getElementById("mainFilterReleaseSlider");
+control[67] = document.getElementById("mainFilterReleaseSlider");
+
+var mainFilterEnvMod = document.getElementById("mainFilterEnvModSlider");
+control[68] = document.getElementById("mainFilterEnvModSlider");
+
+//delay
+var delayTime = document.getElementById("delayTimeSlider");
+control[69] = document.getElementById("delayTimeSlider");
+
+var delayTimeDisplay = document.getElementById("delayTimeDisplay");  
+
+var delayFb = document.getElementById("delayFbSlider");
+control[70] = document.getElementById("delayFbSlider");
+
+var delayWet = document.getElementById("delayWetSlider");
+control[71] = document.getElementById("delayWetSlider");
+
+// chorus
+
+var chorusDepth = document.getElementById("chorusDepthSlider");
+control[72] = document.getElementById("chorusDepthSlider");
+
+var chorusRate = document.getElementById("chorusRateSlider");
+control[73] = document.getElementById("chorusRateSlider");
+
+var chorusDelay = document.getElementById("chorusDelaySlider");
+control[74] = document.getElementById("chorusDelaySlider");
+
+var chorusWet = document.getElementById("chorusWetSlider");
+control[75] = document.getElementById("chorusWetSlider");
+
+/////////////////////////////////////////// DOM Elements to variables
+
+/////////////////////////////////////////// Global variables
+
+// last changed gui param for MIDI learn
+var lastChanged;
+
+/////////////////////////////////////////// Global Variables
+
+/////////////////////////////////////////// Canvas Variables
+
+// Send Tone audio to Nexus
+Nexus.context = Tone.context;
+
+// virtual piano create and send to html div
+var piano = new Nexus.Piano('#keyboardDiv',{
+    'size': [600,100],
+    'mode': 'button',  // 'button', 'toggle', or 'impulse'
+    'lowNote': 24,
+    'highNote': 72
+})
+
+// create oscilloscope and send to html div
+var oscilloscope = new Nexus.Oscilloscope('#oscilloscopeDiv',{
+  'size': [600,20]
+})
+
+/////////////////////////////////////////// Canvas Variables
+
+////////////////////////////////////////// MIDI Variables
+var noteOn;
+var noteOff;
+var midiFreq;
+var midiVelocity;
+var count = 0;
+var pitchBend = 1;
+
+////////////////////////////////////////// MIDI Variables
+
+/////////////////////////////////////////// Audio Variables
+
+var freq = 100;
+
+//  create audo objects
+
+// subtractive
+var subOscA = new Tone.Oscillator(440, "sawtooth");
+var subOscB = new Tone.Oscillator(440, "sawtooth");
+var subtractiveCrossFade = new Tone.CrossFade(0.5);
+var subtractiveGain = Tone.context.createGain();
+
+// main filter
+var mainFilterLfo = new Tone.LFO(0.1,0,4000).start();
+var mainFilterLfoGain = Tone.context.createGain();
+var mainFilter = new Tone.Filter();
+var mainFilterEnvelope = new Tone.ScaledEnvelope (0.1,0.1,1,0.1);
+
+// pitch envelope
+var pitchEnvelope = new Tone.ScaledEnvelope (0.1,0.1,1,0.1);
+
+// pitch lfo
+var pitchLfo = new Tone.Oscillator(440, "sine");
+var pitchLfoGain = Tone.context.createGain();
+
+// amp envelope
+var ampEnvelope = new Tone.Envelope (0.1,0.1,1,0.1);
+var vcaNode = Tone.context.createGain();
+
+// effects
+var pingPong = new Tone.PingPongDelay("4n", 0.7);
+var chorus = new Tone.Chorus(4, 2.5, 0.5);
+
+// additive fm
+var fmOsc = new Tone.Oscillator(440, "sine");
+var fmGain = Tone.context.createGain();
+
+// additve oscs
+var addOsc1 = new Tone.Oscillator(440, "sine");
+var addOsc2 = new Tone.Oscillator(440, "sine");
+var addOsc3 = new Tone.Oscillator(440, "sine");
+var addOsc4 = new Tone.Oscillator(440, "sine");
+var addOsc5 = new Tone.Oscillator(440, "sine");
+var addOsc6 = new Tone.Oscillator(440, "sine");
+var addOsc7 = new Tone.Oscillator(440, "sine");
+var addOsc8 = new Tone.Oscillator(440, "sine");
+var addOsc9 = new Tone.Oscillator(440, "sine");
+var addOsc10 = new Tone.Oscillator(440, "sine");
+var addOsc11 = new Tone.Oscillator(440, "sine");
+var addOsc12 = new Tone.Oscillator(440, "sine");
+
+// additive pan 
+var addPan1 = new Tone.PanVol(0, 0);
+var addPan2 = new Tone.PanVol(0, 0);
+var addPan3 = new Tone.PanVol(0, 0);
+var addPan4 = new Tone.PanVol(0, 0);
+var addPan5 = new Tone.PanVol(0, 0);
+var addPan6 = new Tone.PanVol(0, 0);
+var addPan7 = new Tone.PanVol(0, 0);
+var addPan8 = new Tone.PanVol(0, 0);
+var addPan9 = new Tone.PanVol(0, 0);
+var addPan10 = new Tone.PanVol(0, 0);
+var addPan11 = new Tone.PanVol(0, 0);
+var addPan12 = new Tone.PanVol(0, 0);
+
+// additive gain
+var addGain1 = Tone.context.createGain();
+var addGain2 = Tone.context.createGain();
+var addGain3 = Tone.context.createGain();
+var addGain4 = Tone.context.createGain();
+var addGain5 = Tone.context.createGain();
+var addGain6 = Tone.context.createGain();
+var addGain7 = Tone.context.createGain();
+var addGain8 = Tone.context.createGain();
+var addGain9 = Tone.context.createGain();
+var addGain10 = Tone.context.createGain();
+var addGain11 = Tone.context.createGain();
+var addGain12 = Tone.context.createGain();
+
+
+// additive volume mod lfos
+var addLfo1 = new Tone.Tremolo(0, 0).start();
+var addLfo2 = new Tone.Tremolo(0, 0).start();
+var addLfo3 = new Tone.Tremolo(0, 0).start();
+var addLfo4 = new Tone.Tremolo(0, 0).start();
+var addLfo5 = new Tone.Tremolo(0, 0).start();
+var addLfo6 = new Tone.Tremolo(0, 0).start();
+var addLfo7 = new Tone.Tremolo(0, 0).start();
+var addLfo8 = new Tone.Tremolo(0, 0).start();
+var addLfo9 = new Tone.Tremolo(0, 0).start();
+var addLfo10 = new Tone.Tremolo(0, 0).start();
+var addLfo11 = new Tone.Tremolo(0, 0).start();
+var addLfo12 = new Tone.Tremolo(0, 0).start();
+
+addLfo1.spread = 0;
+addLfo2.spread = 0;
+addLfo3.spread = 0;
+addLfo4.spread = 0;
+addLfo5.spread = 0;
+addLfo6.spread = 0;
+addLfo7.spread = 0;
+addLfo8.spread = 0;
+addLfo9.spread = 0;
+addLfo10.spread = 0;
+addLfo11.spread = 0;
+addLfo12.spread = 0;
+
+// additive mix
+var addMix = Tone.context.createGain();
+
+/////////////////////////////////////////// Audio Variables
+
+/////////////////////////////////////////// audio connections
+pitchEnvelope.connect(addOsc1.frequency);
+pitchEnvelope.connect(addOsc2.frequency);
+pitchEnvelope.connect(addOsc3.frequency);
+pitchEnvelope.connect(addOsc4.frequency);
+pitchEnvelope.connect(addOsc5.frequency);
+pitchEnvelope.connect(addOsc6.frequency);
+pitchEnvelope.connect(addOsc7.frequency);
+pitchEnvelope.connect(addOsc8.frequency);
+pitchEnvelope.connect(addOsc9.frequency);
+pitchEnvelope.connect(addOsc10.frequency);
+pitchEnvelope.connect(addOsc11.frequency);
+pitchEnvelope.connect(addOsc12.frequency);
+
+pitchEnvelope.connect(subOscA.frequency);
+pitchEnvelope.connect(subOscB.frequency);
+
+pitchLfo.connect(pitchLfoGain);
+pitchLfoGain.connect(addOsc1.frequency);
+pitchLfoGain.connect(addOsc2.frequency);
+pitchLfoGain.connect(addOsc3.frequency);
+pitchLfoGain.connect(addOsc4.frequency);
+pitchLfoGain.connect(addOsc5.frequency);
+pitchLfoGain.connect(addOsc6.frequency);
+pitchLfoGain.connect(addOsc7.frequency);
+pitchLfoGain.connect(addOsc8.frequency);
+pitchLfoGain.connect(addOsc9.frequency);
+pitchLfoGain.connect(addOsc10.frequency);
+pitchLfoGain.connect(addOsc11.frequency);
+pitchLfoGain.connect(addOsc12.frequency);
+
+pitchLfoGain.connect(subOscA.frequency);
+pitchLfoGain.connect(subOscB.frequency);
+
+fmOsc.connect(fmGain);
+fmGain.connect(addOsc1.frequency);
+fmGain.connect(addOsc2.frequency);
+fmGain.connect(addOsc3.frequency);
+fmGain.connect(addOsc4.frequency);
+fmGain.connect(addOsc5.frequency);
+fmGain.connect(addOsc6.frequency);
+fmGain.connect(addOsc7.frequency);
+fmGain.connect(addOsc8.frequency);
+fmGain.connect(addOsc9.frequency);
+fmGain.connect(addOsc10.frequency);
+fmGain.connect(addOsc11.frequency);
+fmGain.connect(addOsc12.frequency);
+
+addOsc1.connect(addLfo1);
+addOsc2.connect(addLfo2);
+addOsc3.connect(addLfo3);
+addOsc4.connect(addLfo4);
+addOsc5.connect(addLfo5);
+addOsc6.connect(addLfo6);
+addOsc7.connect(addLfo7);
+addOsc8.connect(addLfo8);
+addOsc9.connect(addLfo9);
+addOsc10.connect(addLfo10);
+addOsc11.connect(addLfo11);
+addOsc12.connect(addLfo12);
+
+addLfo1.connect(addPan1);
+addLfo2.connect(addPan2);
+addLfo3.connect(addPan3);
+addLfo4.connect(addPan4);
+addLfo5.connect(addPan5);
+addLfo6.connect(addPan6);
+addLfo7.connect(addPan7);
+addLfo8.connect(addPan8);
+addLfo9.connect(addPan9);
+addLfo10.connect(addPan10);
+addLfo11.connect(addPan11);
+addLfo12.connect(addPan12);
+
+addPan1.connect(addGain1);
+addPan2.connect(addGain2);
+addPan3.connect(addGain3);
+addPan4.connect(addGain4);
+addPan5.connect(addGain5);
+addPan6.connect(addGain6);
+addPan7.connect(addGain7);
+addPan8.connect(addGain8);
+addPan9.connect(addGain9);
+addPan10.connect(addGain10);
+addPan11.connect(addGain11);
+addPan12.connect(addGain12);
+
+addGain1.connect(addMix);
+addGain2.connect(addMix);
+addGain3.connect(addMix);
+addGain4.connect(addMix);
+addGain5.connect(addMix);
+addGain6.connect(addMix);
+addGain7.connect(addMix);
+addGain8.connect(addMix);
+addGain9.connect(addMix);
+addGain10.connect(addMix);
+addGain11.connect(addMix);
+addGain12.connect(addMix);
+
+mainFilterLfo.connect(mainFilterLfoGain);
+mainFilterLfoGain.connect(mainFilter.frequency);
+mainFilterEnvelope.connect(mainFilter.frequency);
+
+subOscA.connect(subtractiveCrossFade, 0, 0);
+subOscB.connect(subtractiveCrossFade, 0, 1);
+subtractiveCrossFade.connect(subtractiveGain);
+
+subtractiveGain.connect(mainFilter);
+addMix.connect(mainFilter);
+
+mainFilter.connect(vcaNode);	
+ampEnvelope.connect(vcaNode.gain);
+
+vcaNode.connect(pingPong);
+pingPong.connect(chorus);
+chorus.connect(Tone.Master);
+
+// connect oscilloscope to output
+oscilloscope.connect(Tone.Master);
+
+/////////////////////////////////////////// audio connections
+
+/////////////////////////////////////////// initial values
+
+Tone.Master.volume.value = Nexus.scale(parseFloat(mainGain.value),0,1,-50,-10);
+Tone.Transport.bpm.value = parseFloat(tempoBpm.value);
+
+ var i = 0;
+    while (i<76){
+    	controlCall(i);
+    	i++;
+    }
+
+subOscA.start();
+subOscB.start();
+
+pitchLfo.start();
+fmOsc.start();
+
+addOsc1.start();
+addOsc2.start();
+addOsc3.start();
+addOsc4.start();
+addOsc5.start();
+addOsc6.start();
+addOsc7.start();
+addOsc8.start();
+addOsc9.start();
+addOsc10.start();
+addOsc11.start();
+addOsc12.start();
+
+/////////////////////////////////////////// initial values
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////// Listeners
+
+// get the virtual piano 
+piano.on('change',function(v) {
+	if (v.state){
+		midiVelocity = 1;
+
+		// set the osc frequency to the played key	
+		freq = Nexus.mtof(v.note);
+
+		setFinalFreq();
+
+		ampEnvelope.triggerAttack();
+		pitchEnvelope.triggerAttack();
+		mainFilterEnvelope.triggerAttack();
+
+		if (mainFilterLfoRetrig.checked){
+			mainFilterLfo.stop();
+			mainFilterLfo.start();
+		}
+
+	}else{
+		if (!droneOn.checked){
+			ampEnvelope.triggerRelease();
+			pitchEnvelope.triggerRelease();
+			mainFilterEnvelope.triggerRelease();
+		}
+	}
+})
+
+function startAudioClick(){
+	Tone.start();
+}
+
+// pitch bend action to snap to center
+function pitchBendAction() {
+    pitchBender.value = 0.5;
+}
+
+// display pitch bend range values in gui text
+function pitchBendRangeSet() {
+    bendDisplay.innerHTML = bendRange.value;
+}
+
+// call parameter functions when changed by MIDI cc
+function controlCall(controlMatch){
+	switch(controlMatch){
+		case 0: // gain
+		mainGainSet();
+		case 1: // amp a
+		ampAttackSet();
+		break;
+		case 2: // amp d
+		ampDecaySet();
+		break;
+		case 3: // amp s
+		ampSustainSet();
+		break;
+		case 4: // amp r
+		ampReleaseSet();
+		break;
+		case 5: // fm mod
+		addFmModSet();
+		break;
+		case 6: // fm rate
+		addFmFreqSet();
+		break;
+		case 7: // pitch lfo wave
+		pitchLfoWaveSet();
+		break;
+		case 8: // pitch lfo mod
+		pitchLfoModSet();
+		break;
+		case 9: // pitch lfo rate
+		pitchLfoRateSet();
+		break;
+		case 10: // pitch lfo retrig
+		
+		break;
+		case 11: // pitch lfo sync
+		
+		break;
+		case 12: // pitch env a
+		pitchAttackSet();
+		break;
+		case 13: // pitch env d
+		pitchDecaySet();
+		break;
+		case 14: // pitch env s
+		pitchSustainSet();
+		break;
+		case 15: // pitch env r
+		pitchReleaseSet();
+		break;
+		case 16: // pitch env mod
+		pitchEnvModSet();
+		break;
+		case 17: // add oct
+		addOctaveSet();
+		break;
+		case 18: // add semi
+		addSemiSet();
+		break;
+		case 19: // add fine
+		addFineSet();
+		break;
+		case 20: // harm 1
+		addGainSet(1);
+		break;
+		case 21: // harm 2
+		addGainSet(2);
+		break;
+		case 22: // harm 3
+		addGainSet(3);
+		break;
+		case 23: // harm 4
+		addGainSet(4);
+		break;
+		case 24: // harm 5
+		addGainSet(5);
+		break;
+		case 25: // harm 6
+		addGainSet(6);
+		break;
+		case 26: // harm 7
+		addGainSet(7);
+		break;
+		case 27: // harm 8
+		addGainSet(8);
+		break;
+		case 28: // harm 9
+		addGainSet(9);
+		break;
+		case 29: // harm 10
+		addGainSet(10);
+		break;
+		case 30: // harm 11
+		addGainSet(11);
+		break;
+		case 31: // harm 12
+		addGainSet(12);
+		break;
+		case 32: // harm mix
+		addMixSet();
+		break;
+		case 33: // random mult
+
+		break;
+		case 34: // pan 1
+		addPanSet(1);
+		break;
+		case 35: // pan 2
+		addPanSet(2);
+		break;
+		case 36: // pan 3
+		addPanSet(3);
+		break;
+		case 37: // pan 4
+		addPanSet(4);
+		break;
+		case 38: // pan 5
+		addPanSet(5);
+		break;
+		case 39: // pan 6
+		addPanSet(6);
+		break;
+		case 40: // pan 7
+		addPanSet(7);
+		break;
+		case 41: // pan 8
+		addPanSet(8);
+		break;
+		case 42: // pan 9
+		addPanSet(9);
+		break;
+		case 43: // pan 10
+		addPanSet(10);
+		break;
+		case 44: // pan 11
+		addPanSet(11);
+		break;
+		case 45: // pan 12
+		addPanSet(12);
+		break;
+		case 46: // sub a wav
+		oscAtypeSet();
+		break;
+		case 47: // sub a oct
+		oscAoctaveSet();
+		break;
+		case 48: // sub a semi
+		oscAsemiSet();
+		break;
+		case 49: // sub a fine
+		oscAfineSet();
+		break;
+		case 50: // sub b wave
+		oscBtypeSet();
+		break;
+		case 51: // sub b oct
+		oscBoctaveSet();
+		break;
+		case 52: // sub b semi
+		oscBsemiSet();
+		break;
+		case 53: // sub b fine
+		oscBfineSet();
+		break;
+		case 54: // sub mix
+		subtractiveMixSet();
+		break;
+		case 55: // sub gain
+		subtractiveGainSet();
+		break;
+		case 56: // filter type
+		mainFilterTypeSet();
+		break;
+		case 57: // filter cut
+		mainFilterCutSet();
+		break;
+		case 58: // filter res
+		mainFilterResSet();
+		break;
+		case 59: // filter lfo wav
+		mainFilterLfoWaveSet();
+		break;
+		case 60: // filter lfo mod
+		mainFilterLfoModSet();
+		break;
+		case 61: // filter lfo rate
+		mainFilterLfoRateSet();
+		break;
+		case 62: // filter lfo retrig
+
+		break;
+		case 63: // filter lfo sync
+
+		break;
+		case 64: // filter a
+		mainFilterAttackSet();
+		break;
+		case 65: // filter d
+		mainFilterDecaySet();
+		break;
+		case 66: // filter s
+		mainFilterSustainSet();
+		break;
+		case 67: // filter r
+		mainFilterReleaseSet();
+		break;
+		case 68: // filter mod
+		mainFilterEnvModSet();
+		break;
+		case 69: // delay time
+		delayTimeSet();
+		break;
+		case 70: // delay fb
+		delayFbSet();
+		break;
+		case 71: // delay wet
+		delayWetSet();
+		break;
+		case 72: // chorus depth
+		chorusDepthSet();
+		break;
+		case 73: // chorus rate
+		chorusRateSet();
+		break;
+		case 74: // chorus delay
+		chorusDelaySet();
+		break;
+		case 75: // chorus wet
+		chorusWetSet();
+		break;
+	}
+}
+
+// bpm set
+function bpmSet(){
+	Tone.Transport.bpm.value = parseInt(tempoBpm.value);
+	bpmDisplay.innerHTML = tempoBpm.value;
+	delayTimeSet();
+	pitchLfoRateSet();
+	mainFilterLfoRateSet();
+}
+
+// main gain
+function mainGainSet() {
+	Tone.Master.volume.value = Nexus.scale(parseFloat(mainGain.value),0,1,-50,-10);
+    lastChanged = 0;
+} 
+
+function aeolianSwitch() {
+  	var freqRange = 0.3;
+  	var ampMin = 0.5;
+  	var ampRange = 1;
+    if (aeolianMode.checked){  
+  		addLfo1.frequency.value = Nexus.rf(freqRange);
+  		addLfo1.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo2.frequency.value = Nexus.rf(freqRange);
+  		addLfo2.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo3.frequency.value = Nexus.rf(freqRange);
+  		addLfo3.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo4.frequency.value = Nexus.rf(freqRange);
+  		addLfo4.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo5.frequency.value = Nexus.rf(freqRange);
+  		addLfo5.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo6.frequency.value = Nexus.rf(freqRange);
+  		addLfo6.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo7.frequency.value = Nexus.rf(freqRange);
+  		addLfo7.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo8.frequency.value = Nexus.rf(freqRange);
+  		addLfo8.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo9.frequency.value = Nexus.rf(freqRange);
+  		addLfo9.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo10.frequency.value = Nexus.rf(freqRange);
+  		addLfo10.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo11.frequency.value = Nexus.rf(freqRange);
+  		addLfo11.depth.value = Nexus.rf(ampMin, ampRange);
+
+  		addLfo12.frequency.value = Nexus.rf(freqRange);
+  		addLfo12.depth.value = Nexus.rf(ampMin, ampRange);
+
+      }
+
+    else{
+  		addLfo1.depth.value = 0;
+  		addLfo2.depth.value = 0;
+  		addLfo3.depth.value = 0;
+  		addLfo4.depth.value = 0;
+  		addLfo5.depth.value = 0;
+  		addLfo6.depth.value = 0;
+  		addLfo7.depth.value = 0;
+  		addLfo8.depth.value = 0;
+  		addLfo9.depth.value = 0;
+  		addLfo10.depth.value = 0;
+  		addLfo11.depth.value = 0;
+  		addLfo12.depth.value = 0;
+      }
+}
+
+// additive random
+function additiveRandom() {
+     /* lfoI = 1;
+      while (lfoI < 13 ) {
+        ampLfo[lfoI].freq(0.1*random(1));
+        ampLfo[lfoI].amp(0.3*random());
+      lfoI++;
+      }*/
+      var randRange = 1;
+      harmVol1.value = Nexus.rf(randRange);
+      harmVol2.value = Nexus.rf(randRange);
+      harmVol3.value = Nexus.rf(randRange);
+      harmVol4.value = Nexus.rf(randRange);
+      harmVol5.value = Nexus.rf(randRange);
+      harmVol6.value = Nexus.rf(randRange);
+      harmVol7.value = Nexus.rf(randRange);
+      harmVol8.value = Nexus.rf(randRange);
+      harmVol9.value = Nexus.rf(randRange);
+      harmVol10.value = Nexus.rf(randRange);
+      harmVol11.value = Nexus.rf(randRange);
+      harmVol12.value = Nexus.rf(randRange);
+
+      if (randomMult.checked){
+        harmFreqMult1.value = Nexus.rf(16);
+        harmFreqMult2.value = Nexus.rf(16);
+        harmFreqMult3.value = Nexus.rf(16);
+        harmFreqMult4.value = Nexus.rf(16);
+        harmFreqMult5.value = Nexus.rf(16);
+        harmFreqMult6.value = Nexus.rf(16);
+        harmFreqMult7.value = Nexus.rf(16);
+        harmFreqMult8.value = Nexus.rf(16);
+        harmFreqMult9.value = Nexus.rf(16);
+        harmFreqMult10.value = Nexus.rf(16);
+        harmFreqMult11.value = Nexus.rf(16);
+        harmFreqMult12.value = Nexus.rf(16);
+      }
+
+	  let i = 1
+	  while (i < 13 ) {
+		addGainSet(i);
+		addOctaveSet(i);
+      i++;
+      }
+}
+
+// additive reset
+function additiveReset() {
+      harmVol1.value = 0;
+      harmVol2.value = 0;
+      harmVol3.value = 0;
+      harmVol5.value = 0;
+      harmVol6.value = 0;
+      harmVol4.value = 0;
+      harmVol7.value = 0;
+      harmVol8.value = 0;
+      harmVol9.value = 0;
+      harmVol10.value = 0;
+      harmVol11.value = 0;
+      harmVol12.value = 0;
+
+      harmFreqMult1.value = 1;
+      harmFreqMult2.value = 2;
+      harmFreqMult3.value = 3;
+      harmFreqMult4.value = 4;
+      harmFreqMult5.value = 5;
+      harmFreqMult6.value = 6;
+      harmFreqMult7.value = 7;
+      harmFreqMult8.value = 8;
+      harmFreqMult9.value = 9;
+      harmFreqMult10.value = 10;
+      harmFreqMult11.value = 11;
+      harmFreqMult12.value = 12;
+
+	  let i = 1
+	  while (i < 13 ) {
+		addGainSet(i);
+		addOctaveSet(i);
+      i++;
+      }
+}
+
+// additve freq mult
+function freqMultSet(harm){
+	let currentFreq = freq * pitchBend * addOctaveDetuneValue;
+	switch(harm){
+		case 1:
+		addOsc1.frequency.value = currentFreq * parseFloat(harmFreqMult1.value);
+		break;
+		case 2:
+		addOsc2.frequency.value = currentFreq * parseFloat(harmFreqMult2.value);
+		break;
+		case 3:
+		addOsc3.frequency.value = currentFreq * parseFloat(harmFreqMult3.value);
+		break;
+		case 4:
+		addOsc4.frequency.value = currentFreq * parseFloat(harmFreqMult4.value);
+		break;
+		case 5:
+		addOsc5.frequency.value = currentFreq * parseFloat(harmFreqMult5.value);
+		break;
+		case 6:
+		addOsc6.frequency.value = currentFreq * parseFloat(harmFreqMult6.value);
+		break;
+		case 7:
+		addOsc7.frequency.value = currentFreq* parseFloat(harmFreqMult7.value);
+		break;
+		case 8:
+		addOsc8.frequency.value = currentFreq * parseFloat(harmFreqMult8.value);
+		break;
+		case 9:
+		addOsc9.frequency.value = currentFreq * parseFloat(harmFreqMult9.value);
+		break;
+		case 10:
+		addOsc10.frequency.value = currentFreq * parseFloat(harmFreqMult10.value);
+		break;
+		case 11:
+		addOsc11.frequency.value = currentFreq * parseFloat(harmFreqMult11.value);
+		break;
+		case 12:
+		addOsc12.frequency.value = currentFreq * parseFloat(harmFreqMult12.value);
+		break;
+	}
+}
+
+// additive oct
+function addOctaveSet() {
+	var getValue = Math.round(Nexus.scale(parseFloat(addOctRaw.value),0,1,-3,3));
+	addOctaveDetuneValue = Nexus.octave(getValue);
+	setFinalFreq();
+    lastChanged = 17;
+} 
+
+function setFinalFreq() {
+	let currentFreq = freq * pitchBend;
+
+	subOscA.frequency.value = currentFreq * subAoctaveDetuneValue;
+	subOscB.frequency.value = currentFreq * subBoctaveDetuneValue;
+
+	currentFreq = currentFreq * addOctaveDetuneValue;
+
+	addOsc1.frequency.value = currentFreq * parseFloat(harmFreqMult1.value);
+	addOsc2.frequency.value = currentFreq * parseFloat(harmFreqMult2.value);
+	addOsc3.frequency.value = currentFreq * parseFloat(harmFreqMult3.value);
+	addOsc4.frequency.value = currentFreq * parseFloat(harmFreqMult4.value);
+	addOsc5.frequency.value = currentFreq * parseFloat(harmFreqMult5.value);
+	addOsc6.frequency.value = currentFreq * parseFloat(harmFreqMult6.value);
+	addOsc7.frequency.value = currentFreq * parseFloat(harmFreqMult7.value);
+	addOsc8.frequency.value = currentFreq * parseFloat(harmFreqMult8.value);
+	addOsc9.frequency.value = currentFreq * parseFloat(harmFreqMult9.value);
+	addOsc10.frequency.value = currentFreq * parseFloat(harmFreqMult10.value);
+	addOsc11.frequency.value = currentFreq * parseFloat(harmFreqMult11.value);
+	addOsc12.frequency.value = currentFreq * parseFloat(harmFreqMult12.value);
+}
+
+// additive semi
+function addSemiSet() {
+	addSemi = parseInt(Nexus.scale(parseFloat(addSemiRaw.value),0,1,-1200,1200)/100);
+	addSemiDisplay.innerHTML = addSemi;
+	addDetuneSet();
+    lastChanged = 18;
+} 
+
+// additive fine
+function addFineSet() {
+	addFine = parseInt(Nexus.scale(parseFloat(addFineRaw.value),0,1,-100,100));
+	addFineDisplay.innerHTML = addFine;
+	addDetuneSet();
+    lastChanged = 19;
+} 
+
+// additive detune
+function addDetuneSet() {
+	let currentDetune = (addSemi*100) + addFine;
+	addOsc1.detune.value = currentDetune;
+	addOsc2.detune.value = currentDetune;
+	addOsc3.detune.value = currentDetune;
+	addOsc4.detune.value = currentDetune;
+	addOsc5.detune.value = currentDetune;
+	addOsc6.detune.value = currentDetune;
+	addOsc7.detune.value = currentDetune;
+	addOsc8.detune.value = currentDetune;
+	addOsc9.detune.value = currentDetune;
+	addOsc10.detune.value = currentDetune;
+	addOsc11.detune.value = currentDetune;
+	addOsc12.detune.value = currentDetune;
+} 
+
+// additive harmonics
+function addGainSet(harm) {
+	switch(harm){
+		case 1:
+		addGain1.gain.value = parseFloat(harmVol1.value);
+		lastChanged = 20;	
+		break;
+		case 2:
+		addGain2.gain.value = parseFloat(harmVol2.value);
+		lastChanged = 21;	
+		break;
+		case 3:
+		addGain3.gain.value = parseFloat(harmVol3.value);
+		lastChanged = 22;	
+		break;
+		case 4:
+		addGain4.gain.value = parseFloat(harmVol4.value);	
+		lastChanged = 23;	
+		break;
+		case 5:
+		addGain5.gain.value = parseFloat(harmVol5.value);
+		lastChanged = 24;	
+		break;
+		case 6:
+		addGain6.gain.value = parseFloat(harmVol6.value);	
+		lastChanged = 25;	
+		break;
+		case 7:
+		addGain7.gain.value = parseFloat(harmVol7.value);	
+		lastChanged = 26;	
+		break;
+		case 8:
+		addGain8.gain.value = parseFloat(harmVol8.value);	
+		lastChanged = 27;	
+		break;
+		case 9:
+		addGain9.gain.value = parseFloat(harmVol9.value);	
+		lastChanged = 28;	
+		break;
+		case 10:
+		addGain10.gain.value = parseFloat(harmVol10.value);
+		lastChanged = 29;	
+		break;
+		case 11:
+		addGain11.gain.value = parseFloat(harmVol11.value);
+		lastChanged = 30;	
+		break;
+		case 12:
+		addGain12.gain.value = parseFloat(harmVol12.value);
+		lastChanged = 31;	
+		break;
+	}
+} 
+
+// additive pan
+function addPanSet(harm) {
+	switch(harm){
+		case 1:
+		addPan1.pan.value = Nexus.scale(parseFloat(pan1.value),0,1,-1,1);
+		lastChanged = 34;	
+		break;
+		case 2:
+		addPan2.pan.value = Nexus.scale(parseFloat(pan2.value),0,1,-1,1);
+		lastChanged = 35;	
+		break;
+		case 3:
+		addPan3.pan.value = Nexus.scale(parseFloat(pan3.value),0,1,-1,1);
+		lastChanged = 36;	
+		break;
+		case 4:
+		addPan4.pan.value = Nexus.scale(parseFloat(pan4.value),0,1,-1,1);
+		lastChanged = 37;	
+		break;
+		case 5:
+		addPan5.pan.value =Nexus.scale(parseFloat(pan5.value),0,1,-1,1);
+		lastChanged = 38;	
+		break;
+		case 6:
+		addPan6.pan.value = Nexus.scale(parseFloat(pan6.value),0,1,-1,1);	
+		lastChanged = 39;	
+		break;
+		case 7:
+		addPan7.pan.value = Nexus.scale(parseFloat(pan7.value),0,1,-1,1);
+		lastChanged = 40;	
+		break;
+		case 8:
+		addPan8.pan.value = Nexus.scale(parseFloat(pan8.value),0,1,-1,1);
+		lastChanged = 41;	
+		break;
+		case 9:
+		addPan9.pan.value = Nexus.scale(parseFloat(pan9.value),0,1,-1,1);
+		lastChanged = 42;	
+		break;
+		case 10:
+		addPan10.pan.value = Nexus.scale(parseFloat(pan10.value),0,1,-1,1);
+		lastChanged = 43;	
+		break;
+		case 11:
+		addPan11.pan.value = Nexus.scale(parseFloat(pan11.value),0,1,-1,1);
+		lastChanged = 44;	
+		break;
+		case 12:
+		addPan12.pan.value = Nexus.scale(parseFloat(pan12.value),0,1,-1,1);
+		lastChanged = 45;	
+		break;
+	}
+} 
+
+// additive mix
+function addMixSet() {
+	addMix.gain.value = parseFloat(harmMixVol.value);
+    lastChanged = 32;
+} 
+
+// additive fm mod
+function addFmModSet() {
+	fmGain.gain.value = parseFloat(fmMod.value*1000);
+    lastChanged = 5;
+} 
+
+// additive fm freq
+function addFmFreqSet() {
+	fmOsc.frequency.value = Nexus.scale(parseFloat(fmFreq.value),0,1,40,1000);
+    lastChanged = 6;
+} 
+
+// pitch attack
+function pitchAttackSet() {
+    pitchEnvelope.attack = Nexus.scale(parseFloat(pitchAttack.value),0,1,0.01,2);
+    lastChanged = 12;
+}
+
+// pitch decay
+function pitchDecaySet() {
+    pitchEnvelope.decay = Nexus.scale(parseFloat(pitchDecay.value),0,1,0.01,2);
+    lastChanged = 13;
+}
+
+// pitch sustain
+function pitchSustainSet() {
+    pitchEnvelope.sustain = parseFloat(pitchSustain.value);
+    lastChanged = 14;
+}
+
+// pitch release
+function pitchReleaseSet() {
+    pitchEnvelope.release = Nexus.scale(parseFloat(pitchRelease.value),0,1,0.01,3);
+    lastChanged = 15;
+}
+
+// pitch envelope mod
+function pitchEnvModSet() {
+    pitchEnvelope.max = Nexus.scale(parseFloat(pitchEnvMod.value),0,1,0,10000);
+    lastChanged = 16;
+}
+
+// pitch lfo wave
+function pitchLfoWaveSet() {
+	var typeGet = Math.round(Nexus.scale(parseFloat(pitchLfoWave.value),0,1,0,3));
+	var typeString;
+	switch (typeGet){
+		case 0:
+		pitchLfo.type = "sine";
+		typeString = "Sine";
+		break;
+		case 1:
+		pitchLfo.type = "triangle";
+		typeString = "Tri";
+		break;
+		case 2:
+		pitchLfo.type = "sawtooth";
+		typeString = "Saw";
+		break;
+		case 3:
+		pitchLfo.type = "square";
+		typeString = "Square";
+		break;
+	}
+	pitchLfoWaveDisplay.innerHTML = typeString;
+	lastChanged = 7;
+}
+
+// pitch lfo mod
+function pitchLfoModSet() {
+	pitchLfoGain.gain.value = parseFloat(pitchLfoMod.value*1000);
+    lastChanged = 8;	
+}
+
+// pitch lfo rate
+function pitchLfoRateSet() {
+	if (pitchLfoSync.checked){
+		var pitchLfoRateString;
+		var syncValue = parseInt(Nexus.scale(parseFloat(pitchLfoRate.value),0,1,0,24));
+		switch(syncValue){
+		case 0:
+		pitchLfo.frequency.value = "64m";
+		pitchLfoRateString = "64b";
+		break;
+		case 1:
+		pitchLfo.frequency.value = "32m";
+		pitchLfoRateString = "32b";
+		break;
+		case 2:
+		pitchLfo.frequency.value = "16m";
+		pitchLfoRateString = "16b";
+		break;
+		case 3:
+		pitchLfo.frequency.value = "8m";
+		pitchLfoRateString = "8b";
+		break;
+		case 4:
+		pitchLfo.frequency.value = "4m";
+		pitchLfoRateString = "4b";
+		break;	
+		case 5:
+		pitchLfo.frequency.value = "2m";
+		filterLfoRateString = "2b";
+		break;
+		case 6:
+		pitchLfo.frequency.value = "1m";
+		pitchLfoRateString = "1b";
+		break;	
+		case 7:
+		pitchLfo.frequency.value = "2n.";
+		pitchLfoRateString = "1/2d";
+		break;
+		case 8:
+		pitchLfo.frequency.value = "2n";
+		pitchLfoRateString = "1/2";
+		break;
+		case 9:
+		pitchLfo.frequency.value = "2t";
+		pitchLfoRateString = "1/2t";
+		break;
+		case 10:
+		pitchLfo.frequency.value = "4n.";
+		pitchLfoRateString = "1/4d";
+		break;
+		case 11:
+		pitchLfo.frequency.value = "4n";
+		pitchLfoRateString = "1/4";
+		break;
+		case 12:
+		pitchLfo.frequency.value = "4t";
+		pitchLfoRateString = "1/4t";
+		break;
+		case 13:
+		pitchLfo.frequency.value = "8n.";
+		pitchLfoRateString = "1/8d";
+		break;
+		case 14:
+		pitchLfo.frequency.value = "8n";
+		pitchLfoRateString = "1/8";
+		break;
+		case 15:
+		pitchLfo.frequency.value = "8t";
+		pitchLfoRateString = "1/8t";
+		break;
+		case 16:
+		pitchLfo.frequency.value = "16n.";
+		pitchLfoRateString = "1/16d";
+		break;
+		case 17:
+		pitchLfo.frequency.value = "16n";
+		pitchLfoRateString = "1/16";
+		break;
+		case 18:
+		pitchLfo.frequency.value = "16t";
+		pitchLfoRateString = "1/16t";
+		break;
+		case 19:
+		pitchLfo.frequency.value = "32n.";
+		pitchLfoRateString = "1/32d";
+		break;
+		case 20:
+		pitchLfo.frequency.value = "32n";
+		pitchLfoRateString = "1/32";
+		break;
+		case 21:
+		pitchLfo.frequency.value = "32t";
+		pitchLfoRateString = "1/32t";
+		break;
+		case 22:
+		pitchLfo.frequency.value = "64n.";
+		pitchLfoRateString = "1/64d";
+		break;
+		case 23:
+		pitchLfo.frequency.value = "64n";
+		pitchLfoRateString = "1/64";
+		break;
+		case 24:
+		pitchLfo.frequency.value = "64t";
+		pitchLfoRateString = "1/64t";
+		break;
+	}
+	pitchLfoRateDisplay.innerHTML = pitchLfoRateString;
+	}else{
+	pitchLfo.frequency.value = Nexus.scale(parseFloat(pitchLfoRate.value),0,1,0.01,10);
+	pitchLfoRateDisplay.innerHTML = pitchLfo.frequency.value.toFixed(3);
+    }	
+    lastChanged = 9;
+}
+
+// osc a wav
+function oscAtypeSet() {
+	var typeGet = Math.round(Nexus.scale(parseFloat(subOscAwave.value),0,1,0,3));
+	var typeString;
+	switch (typeGet){
+		case 0:
+		subOscA.type = "sine";
+		typeString = "Sine";
+		break;
+		case 1:
+		subOscA.type = "triangle";
+		typeString = "Tri";
+		break;
+		case 2:
+		subOscA.type = "sawtooth";
+		typeString = "Saw";
+		break;
+		case 3:
+		subOscA.type = "square";
+		typeString = "Square";
+		break;
+	}
+	subOscAtypeDisplay.innerHTML = typeString;
+	lastChanged = 46;
+} 
+
+// osc a octave
+function oscAoctaveSet() {
+	var getValue = Math.round(Nexus.scale(parseFloat(subOscAoctRaw.value),0,1,-3,3));
+	subAoctaveDetuneValue = Nexus.octave(getValue);
+	subOscA.frequency.value = freq * pitchBend * subAoctaveDetuneValue;
+	subOscAoctaveDisplay.innerHTML = getValue;
+	lastChanged = 47;
+} 
+
+// osc a semi
+function oscAsemiSet() {
+	subOscAsemi = parseInt(Nexus.scale(parseFloat(subOscAsemiRaw.value),0,1,-1200,1200)/100);
+	subOscA.detune.value = (subOscAsemi*100) + subOscAfine;
+	subOscAsemiDisplay.innerHTML = subOscAsemi;
+	lastChanged = 48;
+} 
+
+// osc a fine
+function oscAfineSet() {
+	subOscAfine = parseInt(Nexus.scale(parseFloat(subOscAfineRaw.value),0,1,-100,100));
+	subOscA.detune.value = (subOscAsemi*100)  + subOscAfine;
+	subOscAfineDisplay.innerHTML = subOscAfine;
+	lastChanged = 49;
+} 
+
+// osc b wav
+function oscBtypeSet() {
+	var typeGet = Math.round(Nexus.scale(parseFloat(subOscBwave.value),0,1,0,3));
+	var typeString;
+	switch (typeGet){
+		case 0:
+		subOscB.type = "sine";
+		typeString = "Sine";
+		break;
+		case 1:
+		subOscB.type = "triangle";
+		typeString = "Tri";
+		break;
+		case 2:
+		subOscB.type = "sawtooth";
+		typeString = "Saw";
+		break;
+		case 3:
+		subOscB.type = "square";
+		typeString = "Square";
+		break;
+	}
+	subOscBtypeDisplay.innerHTML = typeString;
+	lastChanged = 50;
+} 
+
+// osc b octave
+function oscBoctaveSet() {
+	var getValue = Math.round(Nexus.scale(parseFloat(subOscBoctRaw.value),0,1,-3,3));
+	subBoctaveDetuneValue = Nexus.octave(getValue);
+	subOscB.frequency.value = freq * pitchBend * subBoctaveDetuneValue;
+	subOscBoctaveDisplay.innerHTML = getValue;
+	lastChanged = 51;
+} 
+
+// osc b semi
+function oscBsemiSet() {
+	subOscBsemi = parseInt(Nexus.scale(parseFloat(subOscBsemiRaw.value),0,1,-1200,1200)/100);
+	subOscB.detune.value = (subOscBsemi*100) + subOscBfine;
+	subOscBsemiDisplay.innerHTML = subOscBsemi;
+	lastChanged = 52;
+} 
+
+// osc b fine
+function oscBfineSet() {
+	subOscBfine = parseInt(Nexus.scale(parseFloat(subOscBfineRaw.value),0,1,-100,100));
+	subOscB.detune.value = (subOscBsemi*100) + subOscBfine;
+	subOscBfineDisplay.innerHTML = subOscBfine;
+	lastChanged = 53;
+} 
+
+// subtractive cross mix
+function subtractiveMixSet(){
+	subtractiveCrossFade.fade.value = parseFloat(subtractiveMix.value);
+	lastChanged = 54;
+}
+
+// subtractive gain
+function subtractiveGainSet(){
+	subtractiveGain.gain.value = parseFloat(subtractiveVol.value);
+	lastChanged = 55;
+}
+
+// amp attack
+function ampAttackSet() {
+    ampEnvelope.attack = Nexus.scale(parseFloat(ampA.value),0,1,0.01,2);
+    lastChanged = 1;
+}
+
+// amp decay
+function ampDecaySet() {
+    ampEnvelope.decay = Nexus.scale(parseFloat(ampD.value),0,1,0.01,2);
+    lastChanged = 2;
+}
+
+// amp sustain
+function ampSustainSet() {
+    ampEnvelope.sustain = parseFloat(ampS.value);
+    lastChanged = 3;
+}
+
+// amp release
+function ampReleaseSet() {
+    ampEnvelope.release = Nexus.scale(parseFloat(ampR.value),0,1,0.01,3);
+    lastChanged = 4;
+}
+
+// main filter type
+function mainFilterTypeSet() {
+	var filterString;
+	if (parseFloat(mainFilterType.value) <= 0.5){
+		mainFilter.type = "lowpass";
+		filterString = "Lowpass";
+	}
+	else{	
+		mainFilter.type = "highpass";
+		filterString = "Highpass";		
+	}
+	mainFilterTypeDisplay.innerHTML = filterString;
+	lastChanged = 56;
+}
+
+// main filter cut
+function mainFilterCutSet() {
+
+	 /* // position will be between 0 and 100
+	  var minp = 0;
+	  var maxp = 1;
+
+	  // The result should be between 100 an 10000000
+	  var minv = Math.log(20);
+	  var maxv = Math.log(10000);
+
+	  // calculate adjustment factor
+	  var scale = (maxv-minv) / (maxp-minp);
+	  
+	   var logCut = Math.exp(minv + scale*(parseFloat(filterCut.value)-minp));
+	   console.log(logCut.toFixed(2));   
+    	mainFilter.frequency.value = logCut.toFixed(2);*/
+
+    mainFilter.frequency.value = Nexus.scale(parseFloat(filterCut.value),0,1,20,10000);
+    lastChanged = 57;
+}
+
+// main filter res
+function mainFilterResSet() {
+    mainFilter.Q.value = Nexus.scale(parseFloat(filterRes.value),0,1,0.01,10);
+    lastChanged = 58;
+}
+
+// main filter lfo wave
+function mainFilterLfoWaveSet(){
+	var typeGet = Math.round(Nexus.scale(parseFloat(mainFilterLfoWave.value),0,1,0,3));
+	var typeString;
+	switch (typeGet){
+		case 0:
+		mainFilterLfo.type = "sine";
+		typeString = "Sine";
+		break;
+		case 1:
+		mainFilterLfo.type = "triangle";
+		typeString = "Tri";
+		break;
+		case 2:
+		mainFilterLfo.type = "sawtooth";
+		typeString = "Saw";
+		break;
+		case 3:
+		mainFilterLfo.type = "square";
+		typeString = "Square";
+		break;
+	}
+	mainFilterLfoWaveDisplay.innerHTML = typeString;
+	lastChanged = 59;
+}
+
+// main filter lfo mod
+function mainFilterLfoModSet() {
+	mainFilterLfoGain.gain.value = parseFloat(mainFilterLfoMod.value);
+    lastChanged = 60;	
+}
+
+// main filter lfo rate
+function mainFilterLfoRateSet() {
+	if (mainFilterLfoSync.checked){
+		var filterLfoRateString;
+		var syncValue = parseInt(Nexus.scale(parseFloat(mainFilterLfoRate.value),0,1,0,24));
+		switch(syncValue){
+		case 0:
+		mainFilterLfo.frequency.value = "64m";
+		filterLfoRateString = "64b";
+		break;
+		case 1:
+		mainFilterLfo.frequency.value = "32m";
+		filterLfoRateString = "32b";
+		break;
+		case 2:
+		mainFilterLfo.frequency.value = "16m";
+		filterLfoRateString = "16b";
+		break;
+		case 3:
+		mainFilterLfo.frequency.value = "8m";
+		filterLfoRateString = "8b";
+		break;
+		case 4:
+		mainFilterLfo.frequency.value = "4m";
+		filterLfoRateString = "4b";
+		break;	
+		case 5:
+		mainFilterLfo.frequency.value = "2m";
+		filterLfoRateString = "2b";
+		break;
+		case 6:
+		mainFilterLfo.frequency.value = "1m";
+		filterLfoRateString = "1b";
+		break;	
+		case 7:
+		mainFilterLfo.frequency.value = "2n.";
+		filterLfoRateString = "1/2d";
+		break;
+		case 8:
+		mainFilterLfo.frequency.value = "2n";
+		filterLfoRateString = "1/2";
+		break;
+		case 9:
+		mainFilterLfo.frequency.value = "2t";
+		filterLfoRateString = "1/2t";
+		break;
+		case 10:
+		mainFilterLfo.frequency.value = "4n.";
+		filterLfoRateString = "1/4d";
+		break;
+		case 11:
+		mainFilterLfo.frequency.value = "4n";
+		filterLfoRateString = "1/4";
+		break;
+		case 12:
+		mainFilterLfo.frequency.value = "4t";
+		filterLfoRateString = "1/4t";
+		break;
+		case 13:
+		mainFilterLfo.frequency.value = "8n.";
+		filterLfoRateString = "1/8d";
+		break;
+		case 14:
+		mainFilterLfo.frequency.value = "8n";
+		filterLfoRateString = "1/8";
+		break;
+		case 15:
+		mainFilterLfo.frequency.value = "8t";
+		filterLfoRateString = "1/8t";
+		break;
+		case 16:
+		mainFilterLfo.frequency.value = "16n.";
+		filterLfoRateString = "1/16d";
+		break;
+		case 17:
+		mainFilterLfo.frequency.value = "16n";
+		filterLfoRateString = "1/16";
+		break;
+		case 18:
+		mainFilterLfo.frequency.value = "16t";
+		filterLfoRateString = "1/16t";
+		break;
+		case 19:
+		mainFilterLfo.frequency.value = "32n.";
+		filterLfoRateString = "1/32d";
+		break;
+		case 20:
+		mainFilterLfo.frequency.value = "32n";
+		filterLfoRateString = "1/32";
+		break;
+		case 21:
+		mainFilterLfo.frequency.value = "32t";
+		filterLfoRateString = "1/32t";
+		break;
+		case 22:
+		mainFilterLfo.frequency.value = "64n.";
+		filterLfoRateString = "1/64d";
+		break;
+		case 23:
+		mainFilterLfo.frequency.value = "64n";
+		filterLfoRateString = "1/64";
+		break;
+		case 24:
+		mainFilterLfo.frequency.value = "64t";
+		filterLfoRateString = "1/64t";
+		break;
+	}
+	mainFilterLfoRateDisplay.innerHTML = filterLfoRateString;
+	}else{
+	mainFilterLfo.frequency.value = Nexus.scale(parseFloat(mainFilterLfoRate.value),0,1,0.01,10);
+	mainFilterLfoRateDisplay.innerHTML = mainFilterLfo.frequency.value.toFixed(3);
+    }	
+    lastChanged = 61;
+}
+
+// main filter attack
+function mainFilterAttackSet() {
+    mainFilterEnvelope.attack = Nexus.scale(parseFloat(mainFilterAttack.value),0,1,0.01,2);
+    lastChanged = 64;
+}
+
+// main filter decay
+function mainFilterDecaySet() {
+    mainFilterEnvelope.decay = Nexus.scale(parseFloat(mainFilterDecay.value),0,1,0.01,2);
+    lastChanged = 65;
+}
+
+// main filter sustain
+function mainFilterSustainSet() {
+    mainFilterEnvelope.sustain = parseFloat(mainFilterSustain.value);
+    lastChanged = 66;
+}
+
+// main filter release
+function mainFilterReleaseSet() {
+    mainFilterEnvelope.release = Nexus.scale(parseFloat(mainFilterRelease.value),0,1,0.01,3);
+    lastChanged = 67;
+}
+
+// main filter envelope mod
+function mainFilterEnvModSet() {
+    mainFilterEnvelope.max = Nexus.scale(parseFloat(mainFilterEnvMod.value),0,1,0,10000);
+    lastChanged = 68;
+}
+
+// delay time
+function delayTimeSet() {
+	var delayString;
+	switch(parseInt(delayTime.value)){
+		case 0:
+		pingPong.delayTime.value = "64t";
+		delayString = "1/64t";
+		break;
+		case 1:
+		pingPong.delayTime.value = "64n";
+		delayString = "1/64";
+		break;
+		case 2:
+		pingPong.delayTime.value = "64n.";
+		delayString = "1/64d";
+		break;
+		case 3:
+		pingPong.delayTime.value = "32t";
+		delayString = "1/32t";
+		break;
+		case 4:
+		pingPong.delayTime.value = "32n";
+		delayString = "1/32";
+		break;
+		case 5:
+		pingPong.delayTime.value = "32n.";
+		delayString = "1/32d";
+		break;
+		case 6:
+		pingPong.delayTime.value = "16t";
+		delayString = "1/16t";
+		break;
+		case 7:
+		pingPong.delayTime.value = "16n";
+		delayString = "1/16";
+		break;
+		case 8:
+		pingPong.delayTime.value = "16n.";
+		delayString = "1/16d";
+		break;
+		case 9:
+		pingPong.delayTime.value = "8t";
+		delayString = "1/8t";
+		break;
+		case 10:
+		pingPong.delayTime.value = "8n";
+		delayString = "1/8";
+		break;
+		case 11:
+		pingPong.delayTime.value = "8n.";
+		delayString = "1/8d";
+		break;
+		case 12:
+		pingPong.delayTime.value = "4t";
+		delayString = "1/4t";
+		break;
+		case 13:
+		pingPong.delayTime.value = "4n";
+		delayString = "1/4";
+		break;
+		case 14:
+		pingPong.delayTime.value = "4n.";
+		delayString = "1/4d";
+		break;
+		case 15:
+		pingPong.delayTime.value = "2t";
+		delayString = "1/2t";
+		break;
+		case 16:
+		pingPong.delayTime.value = "2n";
+		delayString = "1/2";
+		break;
+		case 17:
+		pingPong.delayTime.value = "2n.";
+		delayString = "1/2d";
+		break;
+		case 18:
+		pingPong.delayTime.value = "1m";
+		delayString = "1b";
+		break;
+	}
+	delayTimeDisplay.innerHTML = delayString;
+    lastChanged = 69;	
+}
+
+// delay feedback
+function delayFbSet() {
+	pingPong.feedback.value = parseFloat(delayFb.value);
+    lastChanged = 70;	
+}
+
+// delay wet
+function delayWetSet() {
+	pingPong.wet.value = parseFloat(delayWet.value);
+    lastChanged = 71;	
+}
+
+// chorus depth
+function chorusDepthSet() {
+	chorus.depth = parseFloat(chorusDepth.value);
+    lastChanged = 72;	
+}
+
+// chorus rate
+function chorusRateSet() {
+	chorus.frequency.value = Nexus.scale(parseFloat(chorusRate.value),0,1,0.01,0.5);
+    lastChanged = 73;	
+}
+
+// chorus delay
+function chorusDelaySet() {
+	chorus.delayTime = Nexus.scale(parseFloat(chorusDelay.value),0,1,2,10);
+    lastChanged = 74;	
+}
+
+// chorus wet
+function chorusWetSet() {
+	chorus.wet.value = parseFloat(chorusWet.value);
+    lastChanged = 75;	
+}
+
+/////////////////////////////////////////// Listeners
+
+/////////////////////////////// Presets //////////////////////////////
+
+function setup() {
+	
+}
+
+function draw() {
+
+}
+
+function presetSave(){
+var arrayOfStrings = [
+  	bendRange.value,
+  	mainGain.value,
+  	droneOn.value,
+    aeolianMode.value,
+    ampA.value,
+    ampD.value,
+    ampS.value,
+    ampR.value,
+    fmMod.value,
+    fmFreq.value,
+    pitchLfoWave.value,
+    pitchLfoMod.value,
+    pitchLfoRate.value,
+    pitchLfoRetrig.value,
+    pitchLfoSync.value,
+    pitchAttack.value,
+    pitchDecay.value,
+    pitchSustain.value,
+    pitchRelease.value,
+    pitchEnvMod.value,
+    addOctRaw.value,
+    addSemiRaw.value,
+    addFineRaw.value,
+	harmVol1.value,   
+	harmVol2.value,
+	harmVol3.value,
+	harmVol4.value,
+	harmVol5.value,
+	harmVol6.value,
+	harmVol7.value,
+	harmVol8.value,
+	harmVol9.value,
+	harmVol10.value,
+	harmVol11.value,
+	harmVol12.value,
+	harmMixVol.value,
+	randomMult.value,
+	freqMult1.value,
+    freqMult2.value,
+    freqMult3.value,
+    freqMult4.value,
+    freqMult5.value,
+    freqMult6.value,
+    freqMult7.value,
+    freqMult8.value,
+    freqMult9.value,
+    freqMult10.value,
+    freqMult11.value,
+    freqMult12.value,
+    pan1.value,
+    pan2.value,
+    pan3.value,
+    pan4.value,
+    pan5.value,
+    pan6.value,
+    pan7.value,
+    pan8.value,
+    pan9.value,
+    pan10.value,
+    pan11.value,
+    pan12.value,
+    subOscAwave.value,
+    subOscAoctRaw.value,
+    subOscAsemiRaw.value,
+    subOscAfineRaw.value,
+    subOscBwave.value,
+    subOscBoctRaw.value,
+    subOscBsemiRaw.value,
+    subOscBfineRaw.value,
+    subtractiveMix.value,
+    subtractiveVol.value,
+    mainFilterType.value,
+    filterCut.value,
+    filterRes.value,
+    mainFilterLfoWave.value,
+    mainFilterLfoMod.value,
+    mainFilterLfoRate.value,
+    mainFilterLfoRetrig.value,
+    mainFilterLfoSync.value,
+    mainFilterAttack.value,
+    mainFilterDecay.value,
+    mainFilterSustain.value,
+    mainFilterRelease.value,
+    mainFilterEnvMod.value,
+    delayTime.value,
+    delayFb.value,
+    delayWet.value,
+    chorusDepth.value,
+    chorusRate.value,
+    chorusDelay.value,
+    chorusWet.value
+    ];
+    var saveName = document.getElementById("presetSaveName");
+    save(arrayOfStrings, saveName.value);
+}
+
+function loadFile(){
+    var pathString = document.getElementById("presetLoadPath");
+    loadStrings(pathString.value, presetLoad);
+}
+
+function presetLoad(preset){
+	bendRange.value = preset[0];
+  	mainGain.value = preset[1];
+  	droneOn.value = preset[2];
+    aeolianMode.value = preset[3];
+    ampA.value = preset[4];
+    ampD.value = preset[5];
+    ampS.value = preset[6];
+    ampR.value = preset[7];
+    fmMod.value = preset[8];
+    fmFreq.value = preset[9];
+    pitchLfoWave.value = preset[10];
+    pitchLfoMod.value = preset[11];
+    pitchLfoRate.value = preset[12];
+    pitchLfoRetrig.value = preset[13];
+    pitchLfoSync.value = preset[14];
+    pitchAttack.value = preset[15];
+    pitchDecay.value = preset[16];
+    pitchSustain.value = preset[17];
+    pitchRelease.value = preset[18];
+    pitchEnvMod.value = preset[19];
+    addOctRaw.value = preset[20];
+    addSemiRaw.value = preset[21];
+    addFineRaw.value = preset[22];
+	harmVol1.value = preset[23];   
+	harmVol2.value = preset[24];
+	harmVol3.value = preset[25];
+	harmVol4.value = preset[26];
+	harmVol5.value = preset[27];
+	harmVol6.value = preset[28];
+	harmVol7.value = preset[29];
+	harmVol8.value = preset[30];
+	harmVol9.value = preset[31];
+	harmVol10.value = preset[32];
+	harmVol11.value = preset[33];
+	harmVol12.value = preset[34];
+	harmMixVol.value = preset[35];
+	randomMult.value = preset[36];
+	freqMult1.value = preset[37];
+    freqMult2.value = preset[38];
+    freqMult3.value = preset[39];
+    freqMult4.value = preset[40];
+    freqMult5.value = preset[41];
+    freqMult6.value = preset[42];
+    freqMult7.value = preset[43];
+    freqMult8.value = preset[44];
+    freqMult9.value = preset[45];
+    freqMult10.value = preset[46];
+    freqMult11.value = preset[47];
+    freqMult12.value = preset[48];
+    pan1.value = preset[49];
+    pan2.value = preset[50];
+    pan3.value = preset[51];
+    pan4.value = preset[52];
+    pan5.value = preset[53];
+    pan6.value = preset[54];
+    pan7.value = preset[55];
+    pan8.value = preset[56];
+    pan9.value = preset[57];
+    pan10.value = preset[58];
+    pan11.value = preset[59];
+    pan12.value = preset[60];
+    subOscAwave.value = preset[61];
+    subOscAoctRaw.value = preset[62];
+    subOscAsemiRaw.value = preset[63];
+    subOscAfineRaw.value = preset[64];
+    subOscBwave.value = preset[65];
+    subOscBoctRaw.value = preset[66];
+    subOscBsemiRaw.value = preset[67];
+    subOscBfineRaw.value = preset[68];
+    subtractiveMix.value = preset[69];
+    subtractiveVol.value = preset[70];
+    mainFilterType.value = preset[71];
+    filterCut.value = preset[72];
+    filterRes.value = preset[73];
+    mainFilterLfoWave.value = preset[74];
+    mainFilterLfoMod.value = preset[75];
+    mainFilterLfoRate.value = preset[76];
+    mainFilterLfoRetrig.value = preset[77];
+    mainFilterLfoSync.value = preset[78];
+    mainFilterAttack.value = preset[79];
+    mainFilterDecay.value = preset[80];
+    mainFilterSustain.value = preset[81];
+    mainFilterRelease.value = preset[82];
+    mainFilterEnvMod.value = preset[83];
+    delayTime.value = preset[84];
+    delayFb.value = preset[85];
+    delayWet.value = preset[86];
+    chorusDepth.value = preset[87];
+    chorusRate.value = preset[88];
+    chorusDelay.value = preset[89];
+    chorusWet.value = preset[90];
+
+    var i = 0;
+    while (i<76){
+    	controlCall(i);
+    	i++;
+    }
+}
+
+/////////////////////////////////////////// MIDI
+
+// get a midi object from the browser
+navigator.requestMIDIAccess()
+    .then(onMIDISuccess, onMIDIFailure);
+
+// process the midi object
+function onMIDISuccess(midiAccess) {
+    midiObject = midiAccess;
+    var inputs = midiAccess.inputs;
+    var outputs = midiAccess.outputs;
+    midiDevices.options.length = 0;
+    midiAccess.inputs.forEach(function (input) {
+    midiDevices.options[midiDevices.options.length] = new Option(input.name, input.id);
+    });
+	console.log('This browser supports WebMIDI!');
+}
+
+// select the midi driver
+midiDevices.addEventListener('change', function() {
+    selectedMidiDevice=midiDevices.value;
+    onMIDISelectedDevice();
+}, false);
+
+// process midi messages from selected driver
+function onMIDISelectedDevice(){
+    for (var input of midiObject.inputs.values()){
+       if (input.id == selectedMidiDevice){
+        	input.onmidimessage = getMIDIMessage;
+      	}else{input.onmidimessage = 0;}
+    }
+}
+
+// browser midi failure console log
+function onMIDIFailure() {
+    console.log('Could not access your MIDI devices.');
+	console.log('WebMIDI is not supported in this browser.');
+}
+
+// process midi messages
+function getMIDIMessage(message) {
+  
+  /*//midi log
+  console.log(message.data[0]);
+  console.log(message.data[1]);
+  console.log(message.data[2]);*/
+    
+    var command = message.data[0];
+    var note = message.data[1];
+    var value = message.data[2];
+    var velocity = (message.data.length > 2) ? message.data[2] : 0; // a velocity value might not be included with a noteOff command
+    indicatorFill = true;
+    switch (command) {
+        case 144: // noteOn
+        myMidiMonitor.innerHTML = 'MIDI Monitor: ' + 'Note On ' + message.data[1] + ' Velocity ' + message.data[2];
+            if (velocity > 0) {
+             noteOn = true;
+             if (velocityOn.checked){
+                midiVelocity = velocity/127;
+             }else{
+                midiVelocity = 1;
+             }
+
+            freq = Nexus.mtof(note);
+
+			setFinalFreq();
+
+		 	ampEnvelope.triggerAttack("+0.0", midiVelocity);
+		 	mainFilterEnvelope.triggerAttack();
+		 	pitchEnvelope.triggerAttack();
+
+		 if (mainFilterLfoRetrig.checked){
+		 		mainFilterLfo.stop();
+		 		mainFilterLfo.start();
+			}
+       	 // piano.toggleKey(note,true);
+            count++;
+            } else { // note off by zero vel
+			// piano.toggleKey(note,false); 
+              count--;
+              if (count <1){
+              	if (!droneOn.checked){
+	            	noteOn = false;
+	            	ampEnvelope.triggerRelease();
+		        	mainFilterEnvelope.triggerRelease();
+		        	pitchEnvelope.triggerRelease();
+				}
+                }
+            }
+            break;
+        case 128: // noteOff
+              myMidiMonitor.innerHTML = 'MIDI Monitor: ' + 'Note Off ' + message.data[1] + ' Velocity ' + message.data[2];
+			  // piano.toggleKey(note,false); 
+              count--;
+              if (count <1){
+              	if (!droneOn.checked){
+                noteOn = false;
+					ampEnvelope.triggerRelease();
+					mainFilterEnvelope.triggerRelease();
+					pitchEnvelope.triggerRelease();
+					piano.toggleKey(note,false); 
+				}
+                }    
+            break;
+        case 224: // pitch bend
+            myMidiMonitor.innerHTML = 'MIDI Monitor: ' + 'Pitch Bend ' + message.data[1] + ' MSB ' + message.data[2];
+            pitchBend = Math.pow(2,((((((message.data[2] << 7) | message.data[1]) * 2) / 16383) - 1) * (bendRange.value))/12);
+            pitchBender.value = value/127;
+
+			setFinalFreq();
+            
+            if (message.data[2]===64){
+              bendAction = false;
+            }else{
+              bendAction = true;
+            }
+            break;
+        case 191: // control change - cc    
+            myMidiMonitor.innerHTML = 'MIDI Monitor: ' + 'CC ' + message.data[1] + ' Value ' + message.data[2];
+            if (!midiLearn.checked){
+                //look in the controlId array and find the index containing the incoming cc
+                var match = controlId.indexOf(message.data[1]);
+                if (match >= 0){
+                  if (match<90){ // sliders
+                    control[match].value = message.data[2]/127;
+                    controlCall(match);
+                  }else{ // checkboxes
+                    if (message.data[2]>63){ 
+                      control[match].checked = true;
+                    }else{
+                      control[match].checked = false;
+                    }
+                    }
+                  }
+                }
+             else{
+                 controlId[lastChanged] = message.data[1];
+             }
+             break;
+          case 176: // control change - cc    
+            myMidiMonitor.innerHTML = 'MIDI Monitor: ' + 'CC ' + message.data[1] + ' Value ' + message.data[2];
+            if (!midiLearn.checked){
+                //look in the controlId array and find the index containing the incoming cc
+                var match = controlId.indexOf(message.data[1]);
+                if (match >= 0){
+                  if (match<90){ // sliders
+                    control[match].value = message.data[2]/127;
+                    controlCall(match);
+                  }else{ // checkboxes
+                    if (message.data[2]>63){
+                      control[match].checked = true;
+                    }else{
+                      control[match].checked = false;
+                    }
+                    }
+                  }
+                }
+               
+             else{
+                 controlId[lastChanged] = message.data[1];
+             }
+             break;
+    }
+}
+
+/////////////////////////////////////////// MIDI
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////// End Script
+
+	</script>
+</body>
+</html>

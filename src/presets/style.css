@@ -1,0 +1,1440 @@
+.deviceNameContainer {
+  position: absolute;
+  top: 10px;
+  left: 400px;
+  font-size: 20px;
+}
+
+.deviceLogoContainer {
+  position: absolute;
+  top: 375px;
+  left: 1175px;
+}
+
+.infoTextContainer {
+  position: absolute;
+  top: 475px;
+  left: 1175px;
+  font-size: 11px;
+}
+
+.manualTextContainer {
+  position: absolute;
+  top: 30px;
+  left: 1075px;
+}
+
+.presetListContainer {
+  position: absolute;
+  top: 200px;
+  left: 1075px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.presetSectionContainer {
+  position: absolute;
+  top: 400px;
+  left: 970px;
+}
+
+.presetsLabelText {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+
+.presetSaveButtonContainer {
+  position: absolute;
+  top: 0px;
+  left: 60px;
+}
+
+.presetSaveNameContainer {
+  position: absolute;
+  top: 20px;
+  left: 0px;
+}
+
+.presetLoadButtonContainer {
+  position: absolute;
+  top: 0px;
+  left: 120px;
+}
+
+.presetLoadPathContainer {
+  position: absolute;
+  top: 60px;
+  left: 0px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.mainSettingsContainer {
+  position: absolute;
+  top: 400px;
+  left: 850px;
+}
+
+.mainGainSliderContainer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100px;
+  height: 10px;
+}
+
+.bpmSliderContainer {
+  position: absolute;
+  top: 40px;
+  left: 0px;
+  width: 100px;
+  height: 10px;
+}
+
+.bpmDisplayText {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+}
+
+.bendRangeSliderContainer {
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  width: 100px;
+  height: 10px;
+}
+
+.bendRangeDisplayText {
+  position: absolute;
+  top: 80px;
+  left: 85px;
+}
+
+.droneContainer {
+  position: absolute;
+  top: 120px;
+  left: 0px;
+}
+
+.aeolianModeContainer {
+  position: absolute;
+  top: 120px;
+  left: 50px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.additiveSectionContainer {
+  position: absolute;
+  top: 10px;
+  left: 160px;
+}
+
+.additiveTuneContainer {
+  position: absolute;
+  top: 10px;
+  left: 285px;
+}
+
+.additiveOctaveSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 40px;
+  left: 0px;
+}
+
+.additiveOctaveDisplayContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 40px;
+  left: 60px;
+}
+
+.additiveSemiSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 80px;
+  left: 0px;
+}
+
+.additiveSemiDisplayContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 80px;
+  left: 40px;
+}
+
+.additiveFineSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 120px;
+  left: 0px;
+}
+
+.additiveFineDisplayContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 120px;
+  left: 40px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.freqMultiplier1 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 240px;
+}
+
+.freqMultiplier2 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 280px;
+}
+
+.freqMultiplier3 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 320px;
+}
+
+.freqMultiplier4 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 360px;
+
+}
+
+.freqMultiplier5 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 400px;
+}
+
+.freqMultiplier6 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 440px;
+}
+
+.freqMultiplier7 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 480px;
+}
+
+.freqMultiplier8 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 520px;
+}
+
+.freqMultiplier9 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 560px;
+}
+
+.freqMultiplier10 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 600px;
+}
+
+.freqMultiplier11 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 640px;
+}
+
+.freqMultiplier12 {
+  position: absolute;
+  width: 30px;
+  top: 175px;
+  left: 680px;
+}
+
+input[type=number] {
+  width: 100%;
+  font-size: 12px;
+}
+
+/*////////////////////////////////////////////////*/
+
+.harmonicsLabelText {
+  position: absolute;
+  top: 25px;
+  left: 250px;
+}
+
+.harmonicsMixLabelText {
+  position: absolute;
+  top: 25px;
+  left: 560px;
+}
+
+.harmonicsRamdomText {
+  position: absolute;
+  top: 25px;
+  left: 425px;
+}
+
+
+.harmonicVolSliderContainer1 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 200px;
+  transform: rotate(-90deg);
+}
+
+.harmonicVolSliderContainer2 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 240px;
+  transform: rotate(-90deg);
+}
+
+.harmonicVolSliderContainer3 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 280px;
+  transform: rotate(-90deg);
+}
+
+.harmonicVolSliderContainer4 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 320px;
+  transform: rotate(-90deg);
+}
+
+.harmonicVolSliderContainer5 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 360px;
+  transform: rotate(-90deg);
+}
+
+.harmonicVolSliderContainer6 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 400px;
+  transform: rotate(-90deg);
+}
+
+.harmonicVolSliderContainer7 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 440px;
+  transform: rotate(-90deg);
+}
+
+.harmonicVolSliderContainer8 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 480px;
+  transform: rotate(-90deg);
+}
+
+.harmonicVolSliderContainer9 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 520px;
+  transform: rotate(-90deg);
+}
+
+
+.harmonicVolSliderContainer10 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 560px;
+  transform: rotate(-90deg);
+}
+
+
+.harmonicVolSliderContainer11 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 600px;
+  transform: rotate(-90deg);
+}
+
+
+.harmonicVolSliderContainer12 {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 640px;
+  transform: rotate(-90deg);
+}
+
+.harmonicMixSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 25px;
+  left: 600px;
+}
+
+.harmonicRandomButtonContainer {
+  position: absolute;
+  top: 25px;
+  left: 400px;
+}
+
+.harmonicRandomMultContainer {
+  position: absolute;
+  top: 25px;
+  left: 530px;
+}
+
+/*----------------------------------Rand Freqs CHECKBOX ----------------------*/
+
+.harmonicRandomMultText {
+  position: absolute;
+  top: 25px;
+  left: 475px;
+}
+
+
+.harmonicResetButtonContainer {
+  position: absolute;
+  top: 25px;
+  left: 340px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.harmonicPanSliderContainer1 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 245px;
+}
+
+.harmonicPanSliderContainer2 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 285px;
+}
+
+.harmonicPanSliderContainer3 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 325px;
+}
+
+.harmonicPanSliderContainer4 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 365px;
+}
+
+.harmonicPanSliderContainer5 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 405px;
+}
+
+.harmonicPanSliderContainer6 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 445px;
+}
+
+.harmonicPanSliderContainer7 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 485px;
+}
+
+.harmonicPanSliderContainer8 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 525px;
+}
+
+.harmonicPanSliderContainer9 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 565px;
+}
+
+
+.harmonicPanSliderContainer10 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 605px;
+}
+
+.harmonicPanSliderContainer11 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 645px;
+}
+
+.harmonicPanSliderContainer12 {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 155px;
+  left: 685px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.fmContainer {
+  position: absolute;
+  top: 0px;
+  left: 250px;
+}
+
+.fmDepthSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 440px;
+  transform: rotate(-90deg);
+}
+
+.fmFreqSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 490px;
+  transform: rotate(-90deg);
+}
+
+.fmLabelText {
+  position: absolute;
+  top: 30px;
+  left: 510px;
+}
+
+.fmDepthText {
+  position: absolute;
+  top: 160px;
+  left: 480px;
+}
+
+.fmFreqText {
+  position: absolute;
+  top: 160px;
+  left: 525px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.pitchModulationContainer {
+  position: absolute;
+  top: 215px;
+  left: 10px;
+}
+
+.pitchEnvelopeContainer {
+  position: absolute;
+  width: 100px;
+  top: 0px;
+  left: 0px;
+}
+
+.pitchAttackSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: -30px;
+  transform: rotate(-90deg);
+}
+
+.pitchDecaySliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 10px;
+  transform: rotate(-90deg);
+}
+
+.pitchSustainSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 50px;
+  transform: rotate(-90deg);
+}
+
+.pitchReleaseSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 90px;
+  transform: rotate(-90deg);
+}
+
+.pitchEnvModSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 130px;
+  transform: rotate(-90deg);
+}
+
+.pitchAttackText {
+  position: absolute;
+  top: 130px;
+  left: 20px;
+}
+
+.pitchDecayText {
+  position: absolute;
+  top: 130px;
+  left: 60px;
+}
+
+.pitchSustainText {
+  position: absolute;
+  top: 130px;
+  left: 100px;
+}
+
+.pitchReleaseText {
+  position: absolute;
+  top: 130px;
+  left: 140px;
+}
+
+.pitchEnvModText {
+  position: absolute;
+  top: 130px;
+  left: 180px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.pitchLfoContainer {
+  position: absolute;
+  width: 100px;
+  top: 0px;
+  left: 230px;
+}
+
+.pitchLfoWaveSliderContainer {
+  position: absolute;
+  top: 20px;
+  width: 100px;
+  height: 10px;
+}
+
+.pitchLfoWaveDisplayContainer {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  width: 100px;
+  height: 10px;
+}
+
+.pitchLfoModSliderContainer {
+  position: absolute;
+  top: 60px;
+  width: 100px;
+  height: 10px;
+}
+
+.pitchLfoRateSliderContainer {
+  position: absolute;
+  top: 100px;
+  width: 100px;
+  height: 10px;
+}
+
+.pitchLfoRateDisplayContainer {
+  position: absolute;
+  top: 100px;
+  left: 40px;
+  width: 100px;
+  height: 10px;
+}
+
+.pitchLfoSyncCheboxContainer {
+  position: absolute;
+  top: 140px;
+  width: 100px;
+  height: 10px;
+}
+
+.pitchLfoRetrigCheboxContainer {
+  position: absolute;
+  top: 140px;
+  left: 40px;
+  width: 100px;
+  height: 10px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.subtractiveSectionContainer {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+}
+
+.oscAsectionContainer {
+  position: absolute;
+  width: 100px;
+  top: 0px;
+  left: 0px;
+}
+
+.oscAtypeSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 20px;
+  left: 0px;
+}
+
+.oscAtypeDisplayContainer {
+  position: absolute;
+  width: 100px;
+  top: 20px;
+  left: 40px;
+}
+
+.oscAoctaveSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 60px;
+  left: 0px;
+}
+
+.oscAoctaveDisplayContainer {
+  position: absolute;
+  width: 100px;
+  top: 60px;
+  left: 60px;
+}
+
+.oscAsemiSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 0px;
+}
+
+.oscAsemiDisplayContainer {
+  position: absolute;
+  width: 100px;
+  top: 100px;
+  left: 40px;
+}
+
+.oscAfineSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 140px;
+  left: 0px;
+}
+
+.oscAfineDisplayContainer {
+  position: absolute;
+  width: 100px;
+  top: 140px;
+  left: 40px;
+}
+
+.oscBsectionContainer {
+  width: 100px;
+  position: absolute;
+  top: 0px;
+  left: 150px;
+}
+
+.oscBtypeSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 20px;
+  left: 0px;
+}
+
+.oscBtypeDisplayContainer {
+  position: absolute;
+  width: 100px;
+  top: 20px;
+  left: 40px;
+}
+
+.oscBoctaveSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 60px;
+  left: 0px;
+}
+
+.oscBoctaveDisplayContainer {
+  position: absolute;
+  width: 100px;
+  top: 60px;
+  left: 60px;
+}
+
+.oscBsemiSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 0px;
+}
+
+.oscBsemiDisplayContainer {
+  position: absolute;
+  width: 100px;
+  top: 100px;
+  left: 40px;
+}
+
+.oscBfineSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 140px;
+  left: 0px;
+}
+
+.oscBfineDisplayContainer {
+  position: absolute;
+  width: 100px;
+  top: 140px;
+  left: 40px;
+}
+
+.subtractiveMixLabelText {
+  position: absolute;
+  top: 160px;
+  left: 115px;
+}
+
+.subtractiveMixSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 75px;
+  transform: rotate(90deg);
+}
+
+.subtractiveGainLabelText {
+  position: absolute;
+  top: 0px;
+  left: 85px;
+}
+
+.subtractiveGainSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 0px;
+  left: 125px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.ampEnvelopeContainer {
+  position: absolute;
+  top: 400px;
+  left: 10px;
+}
+
+.attackSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: -30px;
+  transform: rotate(-90deg);
+}
+
+.decaySliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 10px;
+  transform: rotate(-90deg);
+}
+
+.sustainSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 50px;
+  transform: rotate(-90deg);
+}
+
+.releaseSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 90px;
+  transform: rotate(-90deg);
+}
+
+.ampAttackText {
+  position: absolute;
+  top: 130px;
+  left: 20px;
+}
+
+.ampDecayText {
+  position: absolute;
+  top: 130px;
+  left: 60px;
+}
+
+.ampSustainText {
+  position: absolute;
+  top: 130px;
+  left: 100px;
+}
+
+.ampReleaseText {
+  position: absolute;
+  top: 130px;
+  left: 140px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.filterSettingsContainer {
+  position: absolute;
+  top: 205px;
+  left: 360px;
+}
+
+.filterMainControlsContainer {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+}
+
+.mainFilterTypeSliderContainer {
+  position: absolute;
+  top: 20px;
+  width: 100px;
+  height: 10px;
+}
+
+.mainFilterTypeDisplayTextContainer {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  width: 100px;
+  height: 10px;
+}
+
+.mainFilterCutSliderContainer {
+  position: absolute;
+  top: 60px;
+  width: 100px;
+  height: 10px;
+}
+
+.mainFilterResSliderContainer {
+  position: absolute;
+  top: 100px;
+  width: 100px;
+  height: 10px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.filterLfoContainer {
+  position: absolute;
+  width: 100px;
+  top: 10px;
+  left: 350px;
+}
+
+.mainFilterLfoWaveSliderContainer {
+  position: absolute;
+  top: 20px;
+  width: 100px;
+  height: 10px;
+}
+
+.mainFilterLfoWaveDisplayContainer {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+}
+
+.mainFilterLfoModSliderContainer {
+  position: absolute;
+  top: 60px;
+  width: 100px;
+  height: 10px;
+}
+
+.mainFilterLfoRateSliderContainer {
+  position: absolute;
+  top: 100px;
+  width: 100px;
+  height: 10px;
+}
+
+.mainFilterLfoRateDisplayText {
+  position: absolute;
+  top: 100px;
+  left: 40px;
+  width: 100px;
+  height: 10px;
+}
+
+.mainFilterSyncCheboxContainer {
+  position: absolute;
+  top: 140px;
+  width: 100px;
+  height: 10px;
+}
+
+.mainFilterRetrigCheboxContainer {
+  position: absolute;
+  top: 140px;
+  left: 40px;
+  width: 100px;
+  height: 10px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.filterEnvelopeContainer {
+  position: absolute;
+  width: 100px;
+  top: 10px;
+  left: 120px;
+}
+
+.filterAttackSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: -30px;
+  transform: rotate(-90deg);
+}
+
+.filterDecaySliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 10px;
+  transform: rotate(-90deg);
+}
+
+.filterSustainSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 50px;
+  transform: rotate(-90deg);
+}
+
+.filterReleaseSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 90px;
+  transform: rotate(-90deg);
+}
+
+.mainFilterEnvModSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 70px;
+  left: 130px;
+  transform: rotate(-90deg);
+}
+
+.filterAttackText {
+  position: absolute;
+  top: 130px;
+  left: 20px;
+}
+
+.filterDecayText {
+  position: absolute;
+  top: 130px;
+  left: 60px;
+}
+
+.filterSustainText {
+  position: absolute;
+  top: 130px;
+  left: 100px;
+}
+
+.filterReleaseText {
+  position: absolute;
+  top: 130px;
+  left: 140px;
+}
+
+.filterEnvModText {
+  position: absolute;
+  top: 130px;
+  left: 180px;
+}
+
+
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.chorusSettingsContainer {
+  position: absolute;
+  top: 215px;
+  left: 830px;
+}
+
+.chorusDelaySliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 20px;
+  left: 0px;
+}
+
+.chorusRateSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 60px;
+  left: 0px;
+}
+
+.chorusDepthSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 0px;
+}
+
+.chorusWetSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 140px;
+  left: 0px;
+}
+
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.delaySettingsContainer {
+  position: absolute;
+  top: 215px;
+  left: 950px;
+}
+
+.delayTimeSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 20px;
+  left: 0px;
+}
+
+.delayTimeDisplayText {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+}
+
+.delayFbSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 60px;
+  left: 0px;
+}
+
+.delayWetSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  left: 0px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.midiSettingsContainer {
+  position: absolute;
+  top: 400px;
+  left: 200px;
+}
+
+.midiSelect {
+  position: absolute;
+  width: 200px;
+  height: 10px;
+  top: 0px;
+  left: 0px;
+}
+
+.midiMonitorDisplayContainer {
+  position: absolute;
+  width: 200px;
+  height: 10px;
+  top: 0px;
+  left: 175px;
+}
+
+.midiLearnTextContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 0px;
+  left: 400px;
+}
+
+.midiLearnCheckboxContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 0px;
+  left: 450px;
+}
+
+.midiVelocityTextContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 0px;
+  left: 475px;
+}
+
+.velocityCheboxContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 0px;
+  left: 525px;
+}
+
+.toneStartContainer {
+  position: absolute;
+  width: 90px;
+  top: 0px;
+  left: 545px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.pitchBendSettingsContainer {
+  position: absolute;
+  top: 485px;
+  left: 150px;
+}
+
+.pitchBendSliderContainer {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  top: 0px;
+  left: 0px;
+  transform: rotate(-90deg);
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.keyboardContainer {
+  position: absolute;
+  top: 450px;
+  left: 225px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+
+.oscilloscopeContainer {
+  position: absolute;
+  top: 430px;
+  left: 225px;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
+/*////////////////////////////////////////////////////////////////////*/
+/*////////////////////////////////////////////////////////////////////*/
+/*////////////////////////////////////////////////////////////////////*/
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 5.8px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: rgba(14, 130, 236, 0.73);
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 2.2px 2.2px 1px #000000, 0px 0px 2.2px #0d0d0d;
+  border: 2.8px solid #000000;
+  height: 20px;
+  width: 16px;
+  border-radius: 3px;
+  background: #cfffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: rgba(38, 145, 242, 0.73);
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: rgba(14, 130, 236, 0.73);
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 2.2px 2.2px 1px #000000, 0px 0px 2.2px #0d0d0d;
+  border: 2.8px solid #000000;
+  height: 20px;
+  width: 16px;
+  border-radius: 3px;
+  background: #cfffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: rgba(12, 114, 207, 0.73);
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: rgba(14, 130, 236, 0.73);
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 2.2px 2.2px 1px #000000, 0px 0px 2.2px #0d0d0d;
+  border: 2.8px solid #000000;
+  height: 20px;
+  width: 16px;
+  border-radius: 3px;
+  background: #cfffff;
+  cursor: pointer;
+  height: 8.4px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: rgba(14, 130, 236, 0.73);
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: rgba(38, 145, 242, 0.73);
+}
