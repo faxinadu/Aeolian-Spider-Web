@@ -1,6 +1,10 @@
 # Aeolian-Spider-Web
 
 Inspired by Ocean Swift Aeolian Meditation and Poluphenom synths.
+
+Monophonic synyhesizer with Additive, Subtractive, FM functionality. 
+Features built in FX, Drone Mode, MIDI Learn, randomization and a preset system.
+
 Makes use of Tone.js , p5js, and nexusUI.js
 
 # Demo here: https://faxinadu.net/jstest/tone/synth/
@@ -112,3 +116,5 @@ BPM: Deterimnes the base tempo for the LFO and delay divisors.
 Bend Range: Sets the pitch bend range of incoming MIDI pitch bend information by semitone intervals.
 Drone: When turned off the amplitude envelope starts the release stage when a note is no longer playing. When turned on the amplitude envelope does not trigger the release, allowing for a continuous droning tone.
 Aeolian: When turned on slow randomized LFOs modulate the amplitudes of each harmonic on the additive section. Every time the toggle is switch on, these LFOs are randomized with new parameters. When turned off no modulation is applied to the additive harmonic gains.
+
+
