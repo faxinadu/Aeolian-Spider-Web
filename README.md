@@ -1,5 +1,7 @@
 # Aeolian-Spider-Web
 
+![Screenshot](https://faxinadu.net/jstest/tone/synth/gfx/aeolian-spider-web-sc.png "Screenshot")
+
 Inspired by Ocean Swift Aeolian Meditation and Poluphenom synths.
 
 Monophonic synyhesizer with Additive, Subtractive, FM functionality. 
